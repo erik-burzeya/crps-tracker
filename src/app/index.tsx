@@ -12,14 +12,14 @@ export default function HomeScreen() {
       
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.badge}>CRPS Tracker</Text>
+        <Text style={styles.badge}>[Name]</Text>
 
         <Text style={styles.title}>
-          Track symptoms, pain, and progress.
+          CRPS TRACKER.
         </Text>
 
         <Text style={styles.subtitle}>
-          Simple daily tracking designed for calm and clarity.
+          Einfach täglich tracken.
         </Text>
       </View>
 
@@ -37,6 +37,13 @@ export default function HomeScreen() {
             View History
           </Text>
         </TouchableOpacity>
+
+        {/* 3. Calm Mindfulness Footer */}
+        <View>
+          <Text style={styles.subtitle}>
+          Atme tief durch. Du machst das gut.
+        </Text>
+        </View>
 
       </View>
 
