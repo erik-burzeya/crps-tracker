@@ -3,6 +3,7 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -48,10 +49,72 @@ function HistoryContent() {
   );
 }
 
-function AnalyticsContent() {
+
+function MedikamenteContent() {
+  const [medications, setMedications] = useState<
+  { id: string; name: string; dosage: string }[]
+>([]);
+
+  const [name, setName] = useState("");
+  const [dosage, setDosage] = useState("");
+
+  function addMedication() {
+    if (!name.trim()) return;
+
+    const newMedication = {
+      id: Date.now().toString(),
+      name,
+      dosage,
+    };
+
+    setMedications((prev) => [...prev, newMedication]);
+
+    setName("");
+    setDosage("");
+  }
+
   return (
-    <View style={styles.placeholderContainer}>
-      <Text style={styles.placeholderText}>Statistiken & Insights</Text>
+    <View style={styles.contentContainer}>
+      <Text style={styles.title}>Medikamente</Text>
+
+      <View style={{ gap: 12 }}>
+        <TextInput
+          placeholder="Name des Medikaments"
+          placeholderTextColor="#8E9194"
+          value={name}
+          onChangeText={setName}
+          style={styles.input}
+        />
+
+        <TextInput
+          placeholder="Dosierung"
+          placeholderTextColor="#8E9194"
+          value={dosage}
+          onChangeText={setDosage}
+          style={styles.input}
+        />
+
+        <TouchableOpacity
+          style={styles.primaryButton}
+          onPress={addMedication}
+        >
+          <Text style={styles.primaryButtonText}>
+            Medikament hinzufügen
+          </Text>
+        </TouchableOpacity>
+
+        {medications.map((med) => (
+          <View key={med.id} style={styles.medicationCard}>
+            <Text style={styles.medicationTitle}>
+              {med.name}
+            </Text>
+
+            <Text style={styles.medicationDosage}>
+              {med.dosage}
+            </Text>
+          </View>
+        ))}
+      </View>
     </View>
   );
 }
@@ -75,8 +138,8 @@ export default function HomeScreen() {
         return <HomeContent />;
       case "History":
         return <HistoryContent />;
-      case "Analytics":
-        return <AnalyticsContent />;
+      case "Medikamente":
+  return <MedikamenteContent />;
       case "Settings":
         return <SettingsContent />;
       default:
@@ -236,4 +299,33 @@ const styles = StyleSheet.create({
     backgroundColor: "#A5D6A7",
     marginTop: 4,
   },
+  input: {
+  backgroundColor: "#1A1C1E",
+  borderWidth: 1,
+  borderColor: "#2D3135",
+  borderRadius: 16,
+  padding: 16,
+  color: "white",
+  fontSize: 16,
+},
+
+medicationCard: {
+  backgroundColor: "#1A1C1E",
+  borderRadius: 16,
+  padding: 16,
+  marginTop: 12,
+  borderWidth: 1,
+  borderColor: "#2D3135",
+},
+
+medicationTitle: {
+  color: "white",
+  fontSize: 18,
+  fontWeight: "bold",
+},
+
+medicationDosage: {
+  color: "#8E9194",
+  marginTop: 4,
+},
 });
