@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import {
+  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  SafeAreaView,
 } from "react-native";
 
 // 1. Inhalt für den Home-Screen (Dein Original-Code)
@@ -88,7 +88,7 @@ export default function HomeScreen() {
   const tabs = [
     { id: "Home", label: "Home" },
     { id: "History", label: "Verlauf" },
-    { id: "Analytics", label: "Analyse" },
+    { id: "Medikamente", label: "Medikamente" },
     { id: "Settings", label: "Optionen" },
   ];
 
