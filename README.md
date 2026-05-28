@@ -1,56 +1,105 @@
-# Welcome to your Expo app 👋
+# CRPS Tracker
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern, privacy-focused companion app designed to help people with Complex Regional Pain Syndrome (CRPS) document symptoms, identify patterns, and better understand their daily condition.
 
-## Get started
+---
 
-1. Install dependencies
+## ✨ Overview
 
-   ```bash
-   npm install
-   ```
+CRPS Tracker was created to make symptom tracking simpler, more structured, and emotionally supportive.
+Instead of overwhelming users with complex medical tools, the app focuses on clarity, accessibility, and meaningful insights.
 
-2. Start the app
+The goal is to help users:
 
-   ```bash
-   npx expo start
-   ```
+* Track pain and symptoms over time
+* Document medications and treatments
+* Recognize triggers and recurring patterns
+* Create a clearer overview for personal reflection or medical appointments
+* Build routines that support long-term symptom management
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 🩺 Core Features
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Daily Symptom Tracking
 
-## Get a fresh project
+Log pain intensity, affected body regions, mobility limitations, swelling, skin changes, fatigue, and additional symptoms.
 
-When you're ready, run:
+### Medication & Treatment Journal
 
-```bash
-npm run reset-project
-```
+Track medications, therapies, and supportive interventions in one organized place.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Emotional & Mental Wellbeing Support
 
-### Other setup steps
+Document mood, stress levels, sleep quality, and emotional state to better understand the connection between mental and physical health.
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+### Pattern Recognition
 
-## Learn more
+Visualize trends and recurring symptom patterns over time.
 
-To learn more about developing your project with Expo, look at the following resources:
+### Clean & Accessible Design
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Built with a calm, minimal interface designed to reduce cognitive overload and remain easy to use during difficult days.
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+## 🔒 Privacy First
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Health data is deeply personal.
+CRPS Tracker is designed with a strong focus on privacy, local-first thinking, and user control.
+
+Users should always remain in control of:
+
+* Their symptom history
+* Exported reports
+* Stored data
+* Sharing decisions
+
+---
+
+## 🚀 Vision
+
+CRPS Tracker aims to become more than a symptom diary.
+The long-term vision is to create a supportive ecosystem for chronic pain management that combines:
+
+* structured tracking,
+* emotional support,
+* personalized insights,
+* and practical everyday usability.
+
+The project focuses on building something genuinely helpful for people living with chronic pain — not just another generic health app.
+
+---
+
+## 🛠️ Tech Stack
+
+Current development stack:
+
+* React Native
+* Expo
+* TypeScript
+* Expo Router
+
+---
+
+## 📱 Current Status
+
+The app is currently in active development.
+New features, UI improvements, and tracking systems are being added continuously.
+
+---
+
+## 🤝 Contributing
+
+Feedback, ideas, and constructive suggestions are always welcome.
+The project especially values input from people with lived experience of chronic pain or CRPS.
+
+---
+
+# Short Description
+
+CRPS Tracker is a modern symptom and wellness tracking app designed specifically for people living with Complex Regional Pain Syndrome (CRPS). The app helps users document symptoms, medications, emotional wellbeing, and daily patterns in a simple, supportive, and privacy-focused way.
+
+---
+
+*This README was generated by AI*
