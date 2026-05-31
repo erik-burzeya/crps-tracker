@@ -119,9 +119,30 @@ function MedikamenteContent() {
 }
 
 function NewEntryContent() {
+  const [saved, setSaved] = useState(false);
   return (
     <View style={styles.contentContainer}>
       <Text style={styles.title}>Neuer Eintrag</Text>
+      {saved && (
+  <View
+    style={{
+      backgroundColor: "#bad8bb",
+      padding: 16,
+      borderRadius: 16,
+      marginBottom: 16,
+    }}
+  >
+    <Text
+      style={{
+        color: "#0F1113",
+        fontWeight: "bold",
+        textAlign: "center",
+      }}
+    >
+      Eintrag erfolgreich gespeichert!
+    </Text>
+  </View>
+)}
 
       <TextInput
         placeholder="Schmerzlevel 0-10"
@@ -145,11 +166,18 @@ function NewEntryContent() {
 
       <TouchableOpacity
         style={[styles.primaryButton, { marginTop: 20 }]}
+        onPress={() => {
+          setSaved(true);
+
+          setTimeout(() => {
+            setSaved(false);
+          }, 3000);
+        }}
       >
         <Text style={styles.primaryButtonText}>
           Eintrag speichern
         </Text>
-      </TouchableOpacity>
+</TouchableOpacity>
     </View>
   );
 }
