@@ -6,7 +6,8 @@ export default function ExportTab() {
       style={{
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
+        paddingHorizontal: 24,
+        backgroundColor: '#0F1113',
       }}
     >
       <Text>Export Tab</Text>

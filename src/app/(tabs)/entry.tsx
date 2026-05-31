@@ -1,52 +1,106 @@
-import { router } from 'expo-router';
-import { Text, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import {
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 export default function EntryTab() {
+  const [saved, setSaved] = useState(false);
+
   return (
     <View
       style={{
         flex: 1,
-        justifyContent: 'center',
-        paddingHorizontal: 24,
         backgroundColor: '#0F1113',
+        paddingHorizontal: 24,
+        paddingTop: 40,
       }}
     >
-      <View
+      <Text
         style={{
-          marginBottom: 50,
+          color: '#A5D6A7',
+          fontSize: 14,
+          fontWeight: '700',
+          marginBottom: 12,
         }}
       >
-        <Text
-          style={{
-            color: '#A5D6A7',
-            fontSize: 14,
-            fontWeight: '700',
-            marginBottom: 12,
-          }}
-        >
-          [Name]
-        </Text>
+        CRPS TRACKER
+      </Text>
 
-        <Text
-          style={{
-            color: 'white',
-            fontSize: 34,
-            fontWeight: 'bold',
-            marginBottom: 14,
-          }}
-        >
-          CRPS TRACKER.
-        </Text>
+      <Text
+        style={{
+          color: 'white',
+          fontSize: 32,
+          fontWeight: 'bold',
+          marginBottom: 8,
+        }}
+      >
+        Neuer Eintrag
+      </Text>
 
-        <Text
+      <Text
+        style={{
+          color: '#8E9194',
+          marginBottom: 24,
+        }}
+      >
+        Schmerzwerte und Notizen erfassen.
+      </Text>
+
+      {saved && (
+        <View
           style={{
-            color: '#8E9194',
-            fontSize: 16,
+            backgroundColor: '#BAD8BB',
+            padding: 16,
+            borderRadius: 16,
+            marginBottom: 16,
           }}
         >
-          Einfach täglich tracken.
-        </Text>
-      </View>
+          <Text
+            style={{
+              color: '#0F1113',
+              textAlign: 'center',
+              fontWeight: 'bold',
+            }}
+          >
+            Eintrag erfolgreich gespeichert!
+          </Text>
+        </View>
+      )}
+
+      <TextInput
+        placeholder="Schmerzlevel 0–10"
+        placeholderTextColor="#8E9194"
+        style={{
+          backgroundColor: '#1A1C1E',
+          borderWidth: 1,
+          borderColor: '#2D3135',
+          borderRadius: 16,
+          padding: 16,
+          color: 'white',
+          fontSize: 16,
+        }}
+      />
+
+      <TextInput
+        placeholder="Notizen"
+        placeholderTextColor="#8E9194"
+        multiline
+        style={{
+          backgroundColor: '#1A1C1E',
+          borderWidth: 1,
+          borderColor: '#2D3135',
+          borderRadius: 16,
+          padding: 16,
+          color: 'white',
+          fontSize: 16,
+          height: 140,
+          textAlignVertical: 'top',
+          marginTop: 12,
+        }}
+      />
 
       <TouchableOpacity
         style={{
@@ -54,8 +108,15 @@ export default function EntryTab() {
           paddingVertical: 18,
           borderRadius: 18,
           alignItems: 'center',
+          marginTop: 20,
         }}
-        onPress={() => router.push('/new-entry')}
+        onPress={() => {
+          setSaved(true);
+
+          setTimeout(() => {
+            setSaved(false);
+          }, 3000);
+        }}
       >
         <Text
           style={{
@@ -64,7 +125,7 @@ export default function EntryTab() {
             fontWeight: 'bold',
           }}
         >
-          Neuer Eintrag
+          Eintrag speichern
         </Text>
       </TouchableOpacity>
     </View>
