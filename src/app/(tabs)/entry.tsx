@@ -6,14 +6,17 @@ import {
   View,
 } from 'react-native';
 
+import { useTheme } from '@/context/ThemeContext';
+
 export default function EntryTab() {
+  const { colors } = useTheme();
   const [saved, setSaved] = useState(false);
 
   return (
     <View
       style={{
         flex: 1,
-        backgroundColor: '#0F1113',
+        backgroundColor: colors.background,
         paddingHorizontal: 24,
         paddingTop: 40,
       }}
@@ -31,7 +34,7 @@ export default function EntryTab() {
 
       <Text
         style={{
-          color: 'white',
+          color: colors.text,
           fontSize: 32,
           fontWeight: 'bold',
           marginBottom: 8,
@@ -42,7 +45,7 @@ export default function EntryTab() {
 
       <Text
         style={{
-          color: '#8E9194',
+          color: colors.textSecondary,
           marginBottom: 24,
         }}
       >
@@ -72,29 +75,29 @@ export default function EntryTab() {
 
       <TextInput
         placeholder="Schmerzlevel 0–10"
-        placeholderTextColor="#8E9194"
+        placeholderTextColor={colors.textSecondary}
         style={{
-          backgroundColor: '#1A1C1E',
+          backgroundColor: colors.backgroundElement,
           borderWidth: 1,
-          borderColor: '#2D3135',
+          borderColor: colors.backgroundSelected,
           borderRadius: 16,
           padding: 16,
-          color: 'white',
+          color: colors.text,
           fontSize: 16,
         }}
       />
 
       <TextInput
         placeholder="Notizen"
-        placeholderTextColor="#8E9194"
+        placeholderTextColor={colors.textSecondary}
         multiline
         style={{
-          backgroundColor: '#1A1C1E',
+          backgroundColor: colors.backgroundElement,
           borderWidth: 1,
-          borderColor: '#2D3135',
+          borderColor: colors.backgroundSelected,
           borderRadius: 16,
           padding: 16,
-          color: 'white',
+          color: colors.text,
           fontSize: 16,
           height: 140,
           textAlignVertical: 'top',

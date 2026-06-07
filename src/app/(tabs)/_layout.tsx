@@ -1,30 +1,37 @@
 import { Tabs } from 'expo-router';
 
+import { useTheme } from '@/context/ThemeContext';
+
 export default function TabsLayout() {
+  const { colors } = useTheme();
+
   return (
     <Tabs
-    
       screenOptions={{
         headerShown: false,
+
         tabBarShowLabel: true,
-        tabBarIconStyle: {
-        display: 'none',
-        },
+        
         tabBarStyle: {
-        backgroundColor: '#181A1B',
-        borderTopColor: '#2D3135',
-        borderTopWidth: 1,
-        height: 70,
+          backgroundColor: colors.backgroundElement,
+          borderTopColor: colors.backgroundSelected,
+          borderTopWidth: 1,
+          height: 70,
         },
 
-        tabBarActiveTintColor: '#A5D6A7',
-        tabBarInactiveTintColor: '#8E9194',
-
-        tabBarLabelStyle: {
-          fontSize: 12,
-          fontWeight: '600',
-          marginBottom: 8,
+        tabBarIconStyle: {
+          display: 'none',
         },
+        
+        tabBarActiveTintColor: colors.text,
+        tabBarInactiveTintColor: colors.textSecondary,
+
+        tabBarItemStyle: {
+          justifyContent: 'center',
+          paddingVertical: 0,
+        },
+        
+
       }}
     >
       <Tabs.Screen
