@@ -1,8 +1,13 @@
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/context/ThemeContext';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Linking, Text, TouchableOpacity, View } from 'react-native';
 export default function SettingsTab() {
   const { colors, themeMode, setThemeMode } = useTheme();
+
+  const openGithub = () => {
+    console.log('GitHub pressed');
+    Linking.openURL('https://github.com/erik-burzeya/crps-tracker');
+  };
 
   return (
     <View
@@ -128,6 +133,7 @@ export default function SettingsTab() {
         }}
       >
         <TouchableOpacity
+          onPress={openGithub}
           style={{
             padding: Spacing.three,
             borderBottomWidth: 1,
@@ -143,7 +149,6 @@ export default function SettingsTab() {
             GitHub Repository
           </Text>
         </TouchableOpacity>
-
         <TouchableOpacity
           style={{
             padding: Spacing.three,
