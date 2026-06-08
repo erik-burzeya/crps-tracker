@@ -3,7 +3,7 @@
 // -------------------------------------
 
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import MultiSelectChips from '@/components/entry/MultiSelectChips';
 import PainSlider from '@/components/entry/PainSlider';
@@ -14,6 +14,7 @@ import { ADDITIONAL_SYMPTOMS } from '@/constants/additionalSymptoms';
 
 import { PAIN_QUALITIES } from '@/constants/painQualities';
 import { TRIGGERS } from '@/constants/triggers';
+
 
 import {
   SKIN_COLORS,
@@ -75,6 +76,14 @@ export default function EntryTab() {
       }[]
     >([]);
 
+
+  // -------------------------------------
+  // Notes
+  // -------------------------------------
+
+  const [notes, setNotes] = useState('');
+
+
   // -------------------------------------
   // Helper Functions
   // -------------------------------------
@@ -91,6 +100,8 @@ export default function EntryTab() {
   setSelectedSymptom(null);
   setSymptomIntensity(5);
   setAdditionalSymptoms([]);
+  
+  setNotes('');
 };
     
   return (
@@ -270,15 +281,6 @@ export default function EntryTab() {
         }
       />
 
-
-
-
-
-
-
-
-
-
         {/* -------------------------------------
             Zusätzliche Symptome
         ------------------------------------- */}
@@ -363,6 +365,38 @@ export default function EntryTab() {
         ))}
 
 
+      {/* -------------------------------------
+          Notizen
+      ------------------------------------- */}
+
+      <Text
+        style={{
+          color: colors.text,
+          fontSize: 18,
+          fontWeight: '600',
+          marginBottom: 12,
+          marginTop: 24,
+        }}
+      >
+        Notizen
+      </Text>
+
+      <TextInput
+        value={notes}
+        onChangeText={setNotes}
+        placeholder="Freitext für Beobachtungen, Medikamente, besondere Ereignisse ..."
+        placeholderTextColor={colors.textSecondary}
+        multiline
+        textAlignVertical="top"
+        style={{
+          backgroundColor: colors.backgroundElement,
+          color: colors.text,
+          borderRadius: 16,
+          padding: 16,
+          minHeight: 120,
+          fontSize: 16,
+        }}
+      />
 
 
       {/* -------------------------------------
