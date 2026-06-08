@@ -1,6 +1,7 @@
 // -------------------------------------
 // Imports
 // -------------------------------------
+import { useTheme } from '@/context/ThemeContext';
 
 import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
@@ -10,13 +11,14 @@ import { ScrollView } from 'react-native';
 import MultiSelectChips from '@/components/entry/MultiSelectChips';
 import PainSlider from '@/components/entry/PainSlider';
 import SingleSelectChips from '@/components/entry/SingleSelectChips';
-import { useTheme } from '@/context/ThemeContext';
+
 
 import { ADDITIONAL_SYMPTOMS } from '@/constants/additionalSymptoms';
 
 import { PAIN_QUALITIES } from '@/constants/painQualities';
 import { TRIGGERS } from '@/constants/triggers';
 
+import { useEntries } from '@/context/EntriesContext';
 
 import {
   SKIN_COLORS,
@@ -27,7 +29,7 @@ import {
 export default function EntryTab() {
 
   const { colors } = useTheme();
-
+  const { addEntry } = useEntries();
   // -------------------------------------
   // Constants
   // -------------------------------------
@@ -89,6 +91,19 @@ export default function EntryTab() {
   // -------------------------------------
   // Helper Functions
   // -------------------------------------
+  const createEntry = () => {
+    const today = new Date();
+
+    const date =
+      today.toLocaleDateString('de-DE');
+
+    addEntry({
+      id: Date.now().toString(),
+      date,
+      pain: painLevel,
+      note: notes,
+    });
+  };
 
  const resetForm = () => {
   setPainLevel(DEFAULT_PAIN_LEVEL);
@@ -416,6 +431,8 @@ export default function EntryTab() {
         
         
         onPress={() => {
+          createEntry();
+
           setSaved(true);
 
           resetForm();

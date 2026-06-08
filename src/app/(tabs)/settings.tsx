@@ -15,7 +15,7 @@ export default function SettingsTab() {
         flex: 1,
         backgroundColor: colors.background,
         paddingHorizontal: Spacing.four,
-        paddingTop: Spacing.six,
+        paddingTop: 24,
       }}
     >
       <Text

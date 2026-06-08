@@ -1,16 +1,40 @@
-import { Text, View } from 'react-native';
+import { useTheme } from '@/context/ThemeContext';
+import { ScrollView, Text } from 'react-native';
 
 export default function ExportTab() {
+  
+  const { colors } = useTheme();
+  
   return (
-    <View
+    <ScrollView
+      contentContainerStyle={{
+        padding: 24,
+      }}
+      
       style={{
         flex: 1,
-        justifyContent: 'center',
+       
         paddingHorizontal: 24,
-        backgroundColor: '#0F1113',
+        backgroundColor: colors.background,
       }}
     >
-      <Text>Export Tab</Text>
-    </View>
+      <Text
+        style={{
+          color: colors.text,
+          fontSize: 28,
+          fontWeight: 'bold',
+          marginBottom: 24,
+        }}
+      >
+        Export
+      </Text>
+    </ScrollView>
   );
 }
+
+
+
+
+      
+
+  

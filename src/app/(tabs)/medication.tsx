@@ -1,16 +1,32 @@
-import { Text, View } from 'react-native';
+import { useTheme } from '@/context/ThemeContext';
+import { ScrollView, Text } from 'react-native';
 
 export default function MedicationTab() {
-  return (
-    <View
+  const { colors } = useTheme();
+  
+
+return (
+  <ScrollView
+    contentContainerStyle={{
+      padding: 24,
+    }}
+
+    style={{
+      flex: 1,
+      backgroundColor: colors.background,
+    }}
+  > 
+    <Text
       style={{
-        flex: 1,
-        justifyContent: 'center',
-        paddingHorizontal: 24,
-        backgroundColor: '#0F1113',
+        color: colors.text,
+        fontSize: 28,
+        fontWeight: 'bold',
+        marginBottom: 24,
       }}
     >
-      <Text>Medication Tab</Text>
-    </View>
-  );
+      Medikamente
+    </Text>
+  </ScrollView>
+);
+
 }

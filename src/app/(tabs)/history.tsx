@@ -1,26 +1,17 @@
+import { useEntries } from '@/context/EntriesContext';
+import { useTheme } from '@/context/ThemeContext';
 import { ScrollView, Text, View } from 'react-native';
 
 export default function HistoryTab() {
-  const entries = [
-    {
-      id: 1,
-      date: '08.06.2026',
-      pain: 6,
-      note: 'Heute längerer Spaziergang.',
-    },
-    {
-      id: 2,
-      date: '07.06.2026',
-      pain: 4,
-      note: 'Morgens deutlich besser.',
-    },
-  ];
+  const { entries } = useEntries();
+  console.log(entries);
+  const { colors } = useTheme();
 
   return (
     <ScrollView
       style={{
         flex: 1,
-        backgroundColor: '#0F1113',
+        backgroundColor: colors.background,
       }}
       contentContainerStyle={{
         padding: 24,
@@ -28,7 +19,7 @@ export default function HistoryTab() {
     >
       <Text
         style={{
-          color: 'white',
+          color: colors.text,
           fontSize: 28,
           fontWeight: 'bold',
           marginBottom: 24,
@@ -41,7 +32,7 @@ export default function HistoryTab() {
         <View
           key={entry.id}
           style={{
-            backgroundColor: '#1A1D21',
+            backgroundColor: colors.backgroundSelected,
             borderRadius: 16,
             padding: 16,
             marginBottom: 12,
@@ -49,7 +40,7 @@ export default function HistoryTab() {
         >
           <Text
             style={{
-              color: '#AAAAAA',
+              color: colors.text,
               marginBottom: 8,
             }}
           >
@@ -58,7 +49,7 @@ export default function HistoryTab() {
 
           <Text
             style={{
-              color: 'white',
+              color: colors.text,
               fontWeight: '600',
               marginBottom: 4,
             }}
@@ -68,7 +59,7 @@ export default function HistoryTab() {
 
           <Text
             style={{
-              color: 'white',
+              color: colors.text,
             }}
           >
             {entry.note}
