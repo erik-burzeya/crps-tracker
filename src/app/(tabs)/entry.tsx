@@ -1,19 +1,22 @@
-import PainSlider from '@/components/entry/PainSlider';
-import React, { useState } from 'react';
-import {
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
-const [painLevel, setPainLevel] = useState(5);
+import MultiSelectChips from '@/components/entry/MultiSelectChips';
+import { PAIN_QUALITIES } from '@/constants/painQualities';
 
+import React, { useState } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
+
+import PainSlider from '@/components/entry/PainSlider';
 import { useTheme } from '@/context/ThemeContext';
 
 export default function EntryTab() {
   const { colors } = useTheme();
+
   const [saved, setSaved] = useState(false);
   const [painLevel, setPainLevel] = useState(5);
-
+  const [painQualities, setPainQualities] = useState<string[]>([]);
+  const resetForm = () => {
+    setPainLevel(5);
+    setPainQualities([]);
+  };
   return (
     <View
       style={{
@@ -75,11 +78,29 @@ export default function EntryTab() {
         </View>
       )}
 
-     <PainSlider
+      <PainSlider
         value={painLevel}
         onChange={setPainLevel}
       />
 
+      <Text
+      style={{
+        color: colors.text,
+        fontSize: 18,
+        fontWeight: '600',
+        marginBottom: 12,
+        marginTop: 24,
+      }}
+    >
+      Schmerzqualität
+    </Text>
+
+    <MultiSelectChips
+      options={PAIN_QUALITIES}
+      selected={painQualities}
+      onChange={setPainQualities}
+    />
+      
       <TouchableOpacity
         style={{
           backgroundColor: '#A5D6A7',
@@ -88,8 +109,12 @@ export default function EntryTab() {
           alignItems: 'center',
           marginTop: 20,
         }}
+        
+        
         onPress={() => {
           setSaved(true);
+
+          resetForm();
 
           setTimeout(() => {
             setSaved(false);

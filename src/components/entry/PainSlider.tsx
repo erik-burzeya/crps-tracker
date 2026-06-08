@@ -62,13 +62,16 @@ export default function PainSlider({
         </Text>
       </View>
 
-      <Slider
-        minimumValue={0}
-        maximumValue={10}
-        step={1}
-        value={value}
-        onValueChange={onChange}
-      />
+        <Slider
+            minimumValue={0}
+            maximumValue={10}
+            step={1}
+            value={value}
+            onValueChange={onChange}
+            minimumTrackTintColor={colors.primary}
+            maximumTrackTintColor={colors.backgroundSelected}
+            thumbTintColor={colors.primary}
+        />
 
       <Text
         style={{
