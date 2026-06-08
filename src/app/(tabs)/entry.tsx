@@ -1,16 +1,18 @@
+import PainSlider from '@/components/entry/PainSlider';
 import React, { useState } from 'react';
 import {
   Text,
-  TextInput,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
+const [painLevel, setPainLevel] = useState(5);
 
 import { useTheme } from '@/context/ThemeContext';
 
 export default function EntryTab() {
   const { colors } = useTheme();
   const [saved, setSaved] = useState(false);
+  const [painLevel, setPainLevel] = useState(5);
 
   return (
     <View
@@ -73,36 +75,9 @@ export default function EntryTab() {
         </View>
       )}
 
-      <TextInput
-        placeholder="Schmerzlevel 0–10"
-        placeholderTextColor={colors.textSecondary}
-        style={{
-          backgroundColor: colors.backgroundElement,
-          borderWidth: 1,
-          borderColor: colors.backgroundSelected,
-          borderRadius: 16,
-          padding: 16,
-          color: colors.text,
-          fontSize: 16,
-        }}
-      />
-
-      <TextInput
-        placeholder="Notizen"
-        placeholderTextColor={colors.textSecondary}
-        multiline
-        style={{
-          backgroundColor: colors.backgroundElement,
-          borderWidth: 1,
-          borderColor: colors.backgroundSelected,
-          borderRadius: 16,
-          padding: 16,
-          color: colors.text,
-          fontSize: 16,
-          height: 140,
-          textAlignVertical: 'top',
-          marginTop: 12,
-        }}
+     <PainSlider
+        value={painLevel}
+        onChange={setPainLevel}
       />
 
       <TouchableOpacity
