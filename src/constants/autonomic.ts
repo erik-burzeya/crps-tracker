@@ -1,10 +1,10 @@
-export const TEMPERATURE_OPTIONS = [
+export const TEMPERATURE_FEELINGS = [
   'Kalt',
   'Normal',
   'Warm',
 ];
 
-export const SKIN_COLOR_OPTIONS = [
+export const SKIN_COLORS = [
   'Blass',
   'Normal',
   'Gerötet',

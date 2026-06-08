@@ -1,30 +1,98 @@
-import MultiSelectChips from '@/components/entry/MultiSelectChips';
-import { PAIN_QUALITIES } from '@/constants/painQualities';
+// -------------------------------------
+// Imports
+// -------------------------------------
 
 import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
+import MultiSelectChips from '@/components/entry/MultiSelectChips';
 import PainSlider from '@/components/entry/PainSlider';
+import SingleSelectChips from '@/components/entry/SingleSelectChips';
 import { useTheme } from '@/context/ThemeContext';
 
+import { ADDITIONAL_SYMPTOMS } from '@/constants/additionalSymptoms';
+
+import { PAIN_QUALITIES } from '@/constants/painQualities';
 import { TRIGGERS } from '@/constants/triggers';
 
+import {
+  SKIN_COLORS,
+  TEMPERATURE_FEELINGS,
+} from '@/constants/autonomic';
+
+
 export default function EntryTab() {
+
   const { colors } = useTheme();
 
-  const [saved, setSaved] = useState(false);
-  
-  const [painLevel, setPainLevel] = useState(5);
-  const [painQualities, setPainQualities] = useState<string[]>([]);
+  // -------------------------------------
+  // Constants
+  // -------------------------------------
+
   const DEFAULT_PAIN_LEVEL = 5;
 
-  const [triggers, setTriggers] = useState<string[]>([]);
+  // -------------------------------------
+  // State
+  // -------------------------------------
 
-  const resetForm = () => {
-    setPainLevel(DEFAULT_PAIN_LEVEL);
-    setPainQualities([]);
-    setTriggers([]);
-  };
+  const [saved, setSaved] = useState(false);
+
+  
+
+  const [painLevel, setPainLevel] =
+    useState(DEFAULT_PAIN_LEVEL);
+
+  const [painQualities, setPainQualities] =
+    useState<string[]>([]);
+
+  const [triggers, setTriggers] =
+    useState<string[]>([]);
+
+  const [temperatureFeeling, setTemperatureFeeling] =
+    useState<string | null>(null);
+
+  const [skinColor, setSkinColor] =
+    useState<string | null>(null);
+
+  const [swelling, setSwelling] =
+    useState<boolean | null>(null);
+
+  // -------------------------------------
+  // Additional Symptoms
+  // -------------------------------------
+
+  const [selectedSymptom, setSelectedSymptom] =
+    useState<string | null>(null);
+
+  const [symptomIntensity, setSymptomIntensity] =
+    useState(5);
+
+  const [additionalSymptoms, setAdditionalSymptoms] =
+    useState<
+      {
+        symptom: string;
+        intensity: number;
+      }[]
+    >([]);
+
+  // -------------------------------------
+  // Helper Functions
+  // -------------------------------------
+
+ const resetForm = () => {
+  setPainLevel(DEFAULT_PAIN_LEVEL);
+  setPainQualities([]);
+  setTriggers([]);
+
+  setTemperatureFeeling(null);
+  setSkinColor(null);
+  setSwelling(null);
+
+  setSelectedSymptom(null);
+  setSymptomIntensity(5);
+  setAdditionalSymptoms([]);
+};
+    
   return (
     <View
       style={{
@@ -85,7 +153,9 @@ export default function EntryTab() {
           </Text>
         </View>
       )}
-
+      {/* -------------------------------------
+          Schmerzqualität
+      ------------------------------------- */}
       <PainSlider
         value={painLevel}
         onChange={setPainLevel}
@@ -109,6 +179,10 @@ export default function EntryTab() {
         onChange={setPainQualities}
       />
 
+      {/* -------------------------------------
+          Trigger
+      ------------------------------------- */}
+
       <Text
         style={{
           color: colors.text,
@@ -126,8 +200,175 @@ export default function EntryTab() {
         selected={triggers}
         onChange={setTriggers}
       />
-  
-      
+
+      {/* -------------------------------------
+          Temperaturgefühl
+      ------------------------------------- */}
+        <Text
+        style={{
+          color: colors.text,
+          fontSize: 18,
+          fontWeight: '600',
+          marginBottom: 12,
+          marginTop: 24,
+        }}
+      >
+        Temperaturgefühl
+      </Text>
+
+      <SingleSelectChips
+        options={TEMPERATURE_FEELINGS}
+        selected={temperatureFeeling}
+        onChange={setTemperatureFeeling}
+/>
+      {/* -------------------------------------
+          Temperaturgefühl
+      ------------------------------------- */}
+      <Text
+        style={{
+          color: colors.text,
+          fontSize: 18,
+          fontWeight: '600',
+          marginBottom: 12,
+          marginTop: 24,
+        }}
+      >
+        Hautfarbe
+      </Text>
+
+      <SingleSelectChips
+        options={SKIN_COLORS}
+        selected={skinColor}
+        onChange={setSkinColor}
+      />
+      {/* -------------------------------------
+          Schwellung
+      ------------------------------------- */}
+      <Text
+        style={{
+          color: colors.text,
+          fontSize: 18,
+          fontWeight: '600',
+          marginBottom: 12,
+          marginTop: 24,
+        }}
+      >
+        Schwellung
+      </Text>
+
+      <SingleSelectChips
+        options={['Ja', 'Nein']}
+        selected={
+          swelling === null
+            ? null
+            : swelling
+            ? 'Ja'
+            : 'Nein'
+        }
+        onChange={(value) =>
+          setSwelling(value === 'Ja')
+        }
+      />
+
+
+
+
+
+
+
+
+
+
+        {/* -------------------------------------
+            Zusätzliche Symptome
+        ------------------------------------- */}
+
+        <Text
+          style={{
+            color: colors.text,
+            fontSize: 18,
+            fontWeight: '600',
+            marginBottom: 12,
+            marginTop: 24,
+          }}
+        >
+          Zusätzliche Symptome
+        </Text>
+
+        <SingleSelectChips
+          options={ADDITIONAL_SYMPTOMS}
+          selected={selectedSymptom}
+          onChange={setSelectedSymptom}
+        />
+
+        <PainSlider
+          value={symptomIntensity}
+          onChange={setSymptomIntensity}
+        />
+
+        <TouchableOpacity
+          style={{
+            backgroundColor: colors.primary,
+            paddingVertical: 12,
+            borderRadius: 12,
+            alignItems: 'center',
+            marginTop: 12,
+          }}
+          onPress={() => {
+            if (!selectedSymptom) return;
+
+            setAdditionalSymptoms([
+              ...additionalSymptoms,
+              {
+                symptom: selectedSymptom,
+                intensity: symptomIntensity,
+              },
+            ]);
+
+            setSelectedSymptom(null);
+            setSymptomIntensity(5);
+          }}
+        >
+          <Text
+            style={{
+              color: '#0F1113',
+              fontWeight: 'bold',
+            }}
+          >
+            Symptom hinzufügen
+          </Text>
+        </TouchableOpacity>
+
+
+
+
+        {additionalSymptoms.map((item, index) => (
+          <View
+            key={index}
+            style={{
+              backgroundColor: colors.backgroundElement,
+              padding: 12,
+              borderRadius: 12,
+              marginTop: 8,
+            }}
+          >
+            <Text
+              style={{
+                color: colors.text,
+              }}
+            >
+              {item.symptom} ({item.intensity}/10)
+            </Text>
+          </View>
+        ))}
+
+
+
+
+      {/* -------------------------------------
+          Speichern
+      ------------------------------------- */}
+
       <TouchableOpacity
         style={{
           backgroundColor: '#A5D6A7',
@@ -157,6 +398,8 @@ export default function EntryTab() {
         >
           Eintrag speichern
         </Text>
+
+        
       </TouchableOpacity>
     </View>
   );
