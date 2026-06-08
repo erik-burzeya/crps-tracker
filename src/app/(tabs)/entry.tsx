@@ -5,6 +5,8 @@
 import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
+import { ScrollView } from 'react-native';
+
 import MultiSelectChips from '@/components/entry/MultiSelectChips';
 import PainSlider from '@/components/entry/PainSlider';
 import SingleSelectChips from '@/components/entry/SingleSelectChips';
@@ -105,7 +107,7 @@ export default function EntryTab() {
 };
     
   return (
-    <View
+    <ScrollView
       style={{
         flex: 1,
         backgroundColor: colors.background,
@@ -435,6 +437,8 @@ export default function EntryTab() {
 
         
       </TouchableOpacity>
-    </View>
+    
+  </ScrollView>
+  
   );
 }
