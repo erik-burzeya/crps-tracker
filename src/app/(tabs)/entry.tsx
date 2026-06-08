@@ -7,15 +7,23 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import PainSlider from '@/components/entry/PainSlider';
 import { useTheme } from '@/context/ThemeContext';
 
+import { TRIGGERS } from '@/constants/triggers';
+
 export default function EntryTab() {
   const { colors } = useTheme();
 
   const [saved, setSaved] = useState(false);
+  
   const [painLevel, setPainLevel] = useState(5);
   const [painQualities, setPainQualities] = useState<string[]>([]);
+  const DEFAULT_PAIN_LEVEL = 5;
+
+  const [triggers, setTriggers] = useState<string[]>([]);
+
   const resetForm = () => {
-    setPainLevel(5);
+    setPainLevel(DEFAULT_PAIN_LEVEL);
     setPainQualities([]);
+    setTriggers([]);
   };
   return (
     <View
@@ -84,22 +92,41 @@ export default function EntryTab() {
       />
 
       <Text
-      style={{
-        color: colors.text,
-        fontSize: 18,
-        fontWeight: '600',
-        marginBottom: 12,
-        marginTop: 24,
-      }}
-    >
-      Schmerzqualität
-    </Text>
+        style={{
+          color: colors.text,
+          fontSize: 18,
+          fontWeight: '600',
+          marginBottom: 12,
+          marginTop: 24,
+        }}
+      >
+        Schmerzqualität
+      </Text>
 
-    <MultiSelectChips
-      options={PAIN_QUALITIES}
-      selected={painQualities}
-      onChange={setPainQualities}
-    />
+      <MultiSelectChips
+        options={PAIN_QUALITIES}
+        selected={painQualities}
+        onChange={setPainQualities}
+      />
+
+      <Text
+        style={{
+          color: colors.text,
+          fontSize: 18,
+          fontWeight: '600',
+          marginBottom: 12,
+          marginTop: 24,
+        }}
+      >
+        Trigger
+      </Text>
+
+      <MultiSelectChips
+        options={TRIGGERS}
+        selected={triggers}
+        onChange={setTriggers}
+      />
+  
       
       <TouchableOpacity
         style={{
