@@ -126,8 +126,13 @@ export default function EntryTab() {
       style={{
         flex: 1,
         backgroundColor: colors.background,
+        paddingVertical: 8,
+        marginTop: 20,
+        }}
+     contentContainerStyle={{
         paddingHorizontal: 24,
         paddingTop: 40,
+        paddingBottom: 80,
       }}
     >
       <Text
@@ -423,8 +428,8 @@ export default function EntryTab() {
       <TouchableOpacity
         style={{
           backgroundColor: '#A5D6A7',
-          paddingVertical: 18,
-          borderRadius: 18,
+          paddingVertical: 10,
+          borderRadius: 12,
           alignItems: 'center',
           marginTop: 20,
         }}
@@ -445,7 +450,7 @@ export default function EntryTab() {
         <Text
           style={{
             color: '#0F1113',
-            fontSize: 18,
+            
             fontWeight: 'bold',
           }}
         >
