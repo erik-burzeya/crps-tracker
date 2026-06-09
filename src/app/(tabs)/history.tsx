@@ -86,7 +86,7 @@ export default function HistoryTab() {
 
     <Modal
       visible={selectedEntry !== null}
-      animationType="slide"
+      animationType="fade"
       transparent
     >
       <View
@@ -106,16 +106,171 @@ export default function HistoryTab() {
           }}
         >
           <Text
+  style={{
+    color: colors.text,
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  }}
+        >
+          Detailansicht
+        </Text>
+
+        <Text
+          style={{
+            color: colors.text,
+            marginBottom: 8,
+          }}
+        >
+          Datum: {selectedEntry?.date}
+        </Text>
+
+        <Text
+          style={{
+            color: colors.text,
+            marginBottom: 16,
+          }}
+        >
+          Schmerz: {selectedEntry?.pain}/10
+        </Text>
+
+        <Text
+          style={{
+            color: colors.text,
+            fontWeight: 'bold',
+            marginBottom: 6,
+          }}
+        >
+          Notiz
+        </Text>
+
+        <Text
+          style={{
+            color: colors.text,
+            marginBottom: 20,
+          }}
+        >
+          {selectedEntry?.note || 'Keine Notiz vorhanden'}
+        </Text>
+
+
+
+          <Text
+          style={{
+            color: colors.text,
+            fontWeight: 'bold',
+            marginBottom: 6,
+          }}
+          >
+            Schmerzqualitäten
+          </Text>
+            
+          {selectedEntry?.painQualities?.length > 0 ? (
+            selectedEntry.painQualities.map(
+              (quality: string, index: number) => (
+                <Text
+                  key={index}
+                  style={{
+                    color: colors.text,
+                    marginBottom: 4,
+                  }}
+                >
+                  • {quality}
+                </Text>
+              )
+            )
+          ) : (
+            <Text
+              style={{
+                color: colors.text,
+                marginBottom: 12,
+                opacity: 0.7,
+              }}
+            >
+              Keine Angaben
+            </Text>
+          )}
+
+
+          <Text
             style={{
               color: colors.text,
-              fontSize: 22,
               fontWeight: 'bold',
-              marginBottom: 16,
+              marginTop: 12,
+              marginBottom: 6,
             }}
           >
-            Detailansicht
+            Trigger
           </Text>
 
+          {selectedEntry?.triggers?.length > 0 ? (
+            selectedEntry.triggers.map(
+              (trigger: string, index: number) => (
+                <Text
+                  key={index}
+                  style={{
+                    color: colors.text,
+                    marginBottom: 4,
+                  }}
+                >
+                  • {trigger}
+                </Text>
+              )
+            )
+          ) : (
+            <Text
+              style={{
+                color: colors.text,
+                marginBottom: 12,
+                opacity: 0.7,
+              }}
+            >
+              Keine Angaben
+            </Text>
+          )}
+
+          <Text
+            style={{
+              color: colors.text,
+              fontWeight: 'bold',
+              marginTop: 12,
+              marginBottom: 8,
+            }}
+          >
+            Körperliche Symptome
+          </Text>
+
+          <Text
+            style={{
+              color: colors.text,
+              marginBottom: 6,
+            }}
+          >
+            Temperaturgefühl: {selectedEntry?.temperatureFeeling || 'Keine Angabe'}
+          </Text>
+
+          <Text
+            style={{
+              color: colors.text,
+              marginBottom: 6,
+            }}
+          >
+            Hautfarbe: {selectedEntry?.skinColor || 'Keine Angabe'}
+          </Text>
+
+          <Text
+            style={{
+              color: colors.text,
+              marginBottom: 12,
+            }}
+          >
+            Schwellung:{' '}
+            {selectedEntry?.swelling === true
+              ? 'Ja'
+              : selectedEntry?.swelling === false
+              ? 'Nein'
+              : 'Keine Angabe'}
+        </Text>
           <TouchableOpacity
             onPress={() => setSelectedEntry(null)}
           >
