@@ -1,5 +1,6 @@
 import { useEntries } from '@/context/EntriesContext';
 import { useTheme } from '@/context/ThemeContext';
+import { BlurView } from 'expo-blur';
 
 import React, { useState } from 'react';
 
@@ -19,7 +20,7 @@ export default function HistoryTab() {
   useState<any>(null);
   const [showDeleteModal, setShowDeleteModal] =
   useState(false);
-  const { colors } = useTheme();
+  const { colors, themeMode } = useTheme();
 
   return (
   <>
@@ -348,14 +349,38 @@ export default function HistoryTab() {
   animationType="fade"
 >
   <View
+  style={{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 24,
+  }}
+>
+  <BlurView
+    intensity={25}
+    tint={themeMode === 'dark' ? 'dark' : 'light'}
     style={{
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: 'rgba(0,0,0,0.6)',
-      padding: 24,
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
     }}
-  >
+  />
+
+  <View
+    style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0,0,0,0.35)',
+    }}
+  />
+
+  {/* Dein bestehendes Popup */}
+  
     <View
       style={{
         backgroundColor: colors.backgroundElement,

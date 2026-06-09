@@ -2,7 +2,7 @@ import React, {
   createContext,
   useContext,
   useEffect,
-  useState,
+  useState
 } from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -34,6 +34,7 @@ type EntriesContextType = {
   entries: Entry[];
   addEntry: (entry: Entry) => void;
   deleteEntry: (id: string) => void;
+  clearEntries: () => void;
 };
 
 
@@ -89,12 +90,19 @@ const deleteEntry = (id: string) => {
   );
 };
 
+
+
+    const clearEntries = () => {
+    setEntries([]);
+  };
+
 return (
   <EntriesContext.Provider
     value={{
       entries,
       addEntry,
       deleteEntry,
+      clearEntries,
     }}
   >
     {children}
