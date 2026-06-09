@@ -10,8 +10,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 type Entry = {
   id: string;
   date: string;
+
   pain: number;
   note: string;
+
+  painQualities: string[];
+  triggers: string[];
+
+  temperatureFeeling: string | null;
+  skinColor: string | null;
+
+  swelling: boolean | null;
+
+  additionalSymptoms: {
+    symptom: string;
+    intensity: number;
+  }[];
 };
 
 const STORAGE_KEY = 'crps_entries';

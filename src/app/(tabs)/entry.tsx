@@ -92,15 +92,26 @@ export default function EntryTab() {
   // -------------------------------------
   const createEntry = () => {
     const today = new Date();
-
+    
     const date =
       today.toLocaleDateString('de-DE');
 
     addEntry({
       id: Date.now().toString(),
       date,
+
       pain: painLevel,
       note: notes,
+
+      painQualities,
+      triggers,
+
+      temperatureFeeling,
+      skinColor,
+
+      swelling,
+
+      additionalSymptoms,
     });
   };
 
