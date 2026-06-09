@@ -33,7 +33,10 @@ const STORAGE_KEY = 'crps_entries';
 type EntriesContextType = {
   entries: Entry[];
   addEntry: (entry: Entry) => void;
+  deleteEntry: (id: string) => void;
 };
+
+
 
 const EntriesContext = createContext<EntriesContextType | null>(null);
 
@@ -80,11 +83,18 @@ const addEntry = (entry: Entry) => {
   setEntries((prev) => [entry, ...prev]);
 };
 
+const deleteEntry = (id: string) => {
+  setEntries((prev) =>
+    prev.filter((entry) => entry.id !== id)
+  );
+};
+
 return (
   <EntriesContext.Provider
     value={{
       entries,
       addEntry,
+      deleteEntry,
     }}
   >
     {children}

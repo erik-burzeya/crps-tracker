@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 export default function HistoryTab() {
-  const { entries } = useEntries();
+  const { entries, deleteEntry } = useEntries();
   
   console.log(entries);
   const [selectedEntry, setSelectedEntry] =
@@ -270,10 +270,71 @@ export default function HistoryTab() {
               : selectedEntry?.swelling === false
               ? 'Nein'
               : 'Keine Angabe'}
-        </Text>
+          </Text>
+<Text
+  style={{
+    color: colors.text,
+    fontWeight: 'bold',
+    marginTop: 12,
+    marginBottom: 6,
+  }}
+>
+  Zusätzliche Symptome
+</Text>
+
+{selectedEntry?.additionalSymptoms?.length > 0 ? (
+  selectedEntry.additionalSymptoms.map(
+  (
+    item: { symptom: string; intensity: number },
+    index: number
+  ) => (
+      <Text
+        key={index}
+        style={{
+          color: colors.text,
+          marginBottom: 4,
+        }}
+      >
+        • {item.symptom} ({item.intensity}/10)
+      </Text>
+    )
+  )
+) : (
+  <Text
+    style={{
+      color: colors.text,
+      marginBottom: 12,
+      opacity: 0.7,
+    }}
+  >
+    Keine Angaben
+  </Text>
+)}
+
+
+          <TouchableOpacity
+              onPress={() => {
+                if (selectedEntry) {
+                  deleteEntry(selectedEntry.id);
+                  setSelectedEntry(null);
+                }
+              }}
+            >
+              <Text
+                style={{
+                  color: '#FF6B6B',
+                  fontWeight: 'bold',
+                  marginBottom: 16,
+                }}
+              >
+                Löschen
+              </Text>
+          </TouchableOpacity>
+
           <TouchableOpacity
             onPress={() => setSelectedEntry(null)}
           >
+          
             <Text
               style={{
                 color: '#A5D6A7',
