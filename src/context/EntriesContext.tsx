@@ -1,4 +1,11 @@
-import { createContext, useContext, useState } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type Entry = {
   id: string;
@@ -6,6 +13,8 @@ type Entry = {
   pain: number;
   note: string;
 };
+
+const STORAGE_KEY = 'crps_entries';
 
 type EntriesContextType = {
   entries: Entry[];
@@ -21,20 +30,52 @@ export function EntriesProvider({
 }) {
   const [entries, setEntries] = useState<Entry[]>([]);
 
-  const addEntry = (entry: Entry) => {
-    setEntries((prev) => [entry, ...prev]);
-  };
+  useEffect(() => {
+  loadEntries();
+}, []);
 
-  return (
-    <EntriesContext.Provider
-      value={{
-        entries,
-        addEntry,
-      }}
-    >
-      {children}
-    </EntriesContext.Provider>
-  );
+const loadEntries = async () => {
+  try {
+    const stored =
+      await AsyncStorage.getItem(STORAGE_KEY);
+
+    if (stored) {
+      setEntries(JSON.parse(stored));
+    }
+  } catch (error) {
+    console.error('Loading entries failed:', error);
+  }
+};
+
+useEffect(() => {
+  saveEntries();
+}, [entries]);
+
+const saveEntries = async () => {
+  try {
+    await AsyncStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(entries)
+    );
+  } catch (error) {
+    console.error('Saving entries failed:', error);
+  }
+};
+
+const addEntry = (entry: Entry) => {
+  setEntries((prev) => [entry, ...prev]);
+};
+
+return (
+  <EntriesContext.Provider
+    value={{
+      entries,
+      addEntry,
+    }}
+  >
+    {children}
+  </EntriesContext.Provider>
+);
 }
 
 export function useEntries() {

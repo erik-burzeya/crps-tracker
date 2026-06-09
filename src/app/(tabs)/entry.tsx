@@ -2,7 +2,6 @@
 // Imports
 // -------------------------------------
 import { useTheme } from '@/context/ThemeContext';
-
 import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
