@@ -1,13 +1,26 @@
 import { useEntries } from '@/context/EntriesContext';
 import { useTheme } from '@/context/ThemeContext';
-import { ScrollView, Text, View } from 'react-native';
+
+import React, { useState } from 'react';
+
+import {
+  Modal,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 export default function HistoryTab() {
   const { entries } = useEntries();
+  
   console.log(entries);
+  const [selectedEntry, setSelectedEntry] =
+  useState<any>(null);
   const { colors } = useTheme();
 
   return (
+  <>
     <ScrollView
       style={{
         flex: 1,
@@ -29,8 +42,11 @@ export default function HistoryTab() {
       </Text>
 
       {entries.map((entry) => (
-        <View
+        <TouchableOpacity
           key={entry.id}
+          onPress={() => {
+            setSelectedEntry(entry);
+          }}
           style={{
             backgroundColor: colors.backgroundSelected,
             borderRadius: 16,
@@ -64,8 +80,57 @@ export default function HistoryTab() {
           >
             {entry.note}
           </Text>
-        </View>
+        </TouchableOpacity>
       ))}
     </ScrollView>
-  );
+
+    <Modal
+      visible={selectedEntry !== null}
+      animationType="slide"
+      transparent
+    >
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: 'rgba(0,0,0,0.5)',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <View
+          style={{
+            width: '85%',
+            backgroundColor: colors.backgroundElement,
+            borderRadius: 20,
+            padding: 24,
+          }}
+        >
+          <Text
+            style={{
+              color: colors.text,
+              fontSize: 22,
+              fontWeight: 'bold',
+              marginBottom: 16,
+            }}
+          >
+            Detailansicht
+          </Text>
+
+          <TouchableOpacity
+            onPress={() => setSelectedEntry(null)}
+          >
+            <Text
+              style={{
+                color: '#A5D6A7',
+                fontWeight: 'bold',
+              }}
+            >
+              Schließen
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </Modal>
+  </>
+);
 }
