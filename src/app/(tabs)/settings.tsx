@@ -26,7 +26,7 @@ export default function SettingsTab() {
           marginBottom: Spacing.five,
         }}
       >
-        Settings
+        Einstellungen
       </Text>
 
       <Text

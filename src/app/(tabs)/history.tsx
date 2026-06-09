@@ -8,7 +8,7 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
 
 export default function HistoryTab() {
@@ -17,6 +17,8 @@ export default function HistoryTab() {
   console.log(entries);
   const [selectedEntry, setSelectedEntry] =
   useState<any>(null);
+  const [showDeleteModal, setShowDeleteModal] =
+  useState(false);
   const { colors } = useTheme();
 
   return (
@@ -284,10 +286,10 @@ export default function HistoryTab() {
 
 {selectedEntry?.additionalSymptoms?.length > 0 ? (
   selectedEntry.additionalSymptoms.map(
-  (
-    item: { symptom: string; intensity: number },
-    index: number
-  ) => (
+    (
+      item: { symptom: string; intensity: number },
+      index: number
+    ) => (
       <Text
         key={index}
         style={{
@@ -311,42 +313,121 @@ export default function HistoryTab() {
   </Text>
 )}
 
+<TouchableOpacity
+  onPress={() => setShowDeleteModal(true)}
+>
+  <Text
+    style={{
+      color: '#FF6B6B',
+      fontWeight: 'bold',
+      marginBottom: 16,
+    }}
+  >
+    Löschen
+  </Text>
+</TouchableOpacity>
 
-          <TouchableOpacity
-              onPress={() => {
-                if (selectedEntry) {
-                  deleteEntry(selectedEntry.id);
-                  setSelectedEntry(null);
-                }
-              }}
-            >
-              <Text
-                style={{
-                  color: '#FF6B6B',
-                  fontWeight: 'bold',
-                  marginBottom: 16,
-                }}
-              >
-                Löschen
-              </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => setSelectedEntry(null)}
-          >
-          
-            <Text
-              style={{
-                color: '#A5D6A7',
-                fontWeight: 'bold',
-              }}
-            >
-              Schließen
-            </Text>
-          </TouchableOpacity>
+<TouchableOpacity
+  onPress={() => setSelectedEntry(null)}
+>
+  <Text
+    style={{
+      color: '#A5D6A7',
+      fontWeight: 'bold',
+    }}
+  >
+    Schließen
+  </Text>
+</TouchableOpacity>
         </View>
       </View>
-    </Modal>
+        </Modal>
+<Modal
+  visible={showDeleteModal}
+  transparent
+  animationType="fade"
+>
+  <View
+    style={{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0,0,0,0.6)',
+      padding: 24,
+    }}
+  >
+    <View
+      style={{
+        backgroundColor: colors.backgroundElement,
+        borderRadius: 20,
+        padding: 24,
+        width: '100%',
+        maxWidth: 400,
+      }}
+    >
+      <Text
+        style={{
+          color: colors.text,
+          fontSize: 20,
+          fontWeight: 'bold',
+          marginBottom: 12,
+        }}
+      >
+        Eintrag löschen?
+      </Text>
+
+      <Text
+        style={{
+          color: colors.text,
+          marginBottom: 24,
+          opacity: 0.8,
+        }}
+      >
+        Dieser Eintrag wird dauerhaft gelöscht.
+      </Text>
+
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => setShowDeleteModal(false)}
+        >
+          <Text
+            style={{
+              color: '#A5D6A7',
+              fontWeight: 'bold',
+            }}
+          >
+            Abbrechen
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => {
+            if (!selectedEntry) return;
+
+            deleteEntry(selectedEntry.id);
+            setShowDeleteModal(false);
+            setSelectedEntry(null);
+          }}
+        >
+          <Text
+            style={{
+              color: '#FF6B6B',
+              fontWeight: 'bold',
+            }}
+          >
+            Löschen
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  </View>
+</Modal>
+
   </>
 );
 }
