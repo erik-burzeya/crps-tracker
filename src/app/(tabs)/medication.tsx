@@ -1,7 +1,7 @@
 import { useTheme } from '@/context/ThemeContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
-import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Pressable, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 type Medication = {
   id: string;
@@ -236,32 +236,41 @@ export default function MedicationTab() {
       )}
 
       {!showAddForm && (
-        <TouchableOpacity
-          onPress={() => {
-            setEditingId(null);
-            setNewName('');
-            setNewDosage('');
-            setNewNotes('');
-            setShowAddForm(true);
-          }}
-          style={{
-            backgroundColor: '#A5D6A7',
-            padding: 16,
-            borderRadius: 16,
-            alignItems: 'center',
-            marginTop: 8,
-          }}
-        >
-          <Text
-            style={{
-              color: '#000',
-              fontWeight: '600',
-            }}
-          >
-            Medikament hinzufügen
-          </Text>
-        </TouchableOpacity>
-      )}
+  <Pressable
+    style={({ pressed }) => ({
+      backgroundColor: pressed
+        ? 'rgba(165,214,167,0.85)'
+        : '#A5D6A7',
+
+      padding: 16,
+      borderRadius: 16,
+      alignItems: 'center',
+      marginTop: 8,
+
+      transform: [
+        {
+          scale: pressed ? 0.97 : 1,
+        },
+      ],
+    })}
+    onPress={() => {
+      setEditingId(null);
+      setNewName('');
+      setNewDosage('');
+      setNewNotes('');
+      setShowAddForm(true);
+    }}
+  >
+    <Text
+      style={{
+        color: '#000',
+        fontWeight: '600',
+      }}
+    >
+      Medikament hinzufügen
+    </Text>
+  </Pressable>
+)}
 
       {showAddForm && (
         <View

@@ -3,7 +3,7 @@
 // -------------------------------------
 import { useTheme } from '@/context/ThemeContext';
 import React, { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Pressable, Text, TextInput, View } from 'react-native';
 
 import { ScrollView } from 'react-native';
 
@@ -340,38 +340,45 @@ export default function EntryTab() {
           onChange={setSymptomIntensity}
         />
 
-        <TouchableOpacity
-          style={{
-            backgroundColor: colors.primary,
-            paddingVertical: 12,
-            borderRadius: 12,
-            alignItems: 'center',
-            marginTop: 12,
-          }}
-          onPress={() => {
-            if (!selectedSymptom) return;
+        <Pressable
+  style={({ pressed }) => ({
+    backgroundColor: pressed ? 'rgba(165,214,167,0.85)' : '#A5D6A7',
+    paddingVertical: 10,
+    borderRadius: 12,
+    marginBottom: 50,
+    alignItems: 'center',
+    marginTop: 20,
+    transform: [
+      {
+        scale: pressed ? 0.97 : 1,
+      },
+    ],
+  })} // <-- Hier wird die Style-Funktion korrekt geschlossen!
+  onPress={() => {
+    if (!selectedSymptom) return;
 
-            setAdditionalSymptoms([
-              ...additionalSymptoms,
-              {
-                symptom: selectedSymptom,
-                intensity: symptomIntensity,
-              },
-            ]);
+    setAdditionalSymptoms([
+      ...additionalSymptoms,
+      {
+        symptom: selectedSymptom,
+        intensity: symptomIntensity,
+      },
+    ]);
 
-            setSelectedSymptom(null);
-            setSymptomIntensity(5);
-          }}
-        >
-          <Text
-            style={{
-              color: '#0F1113',
-              fontWeight: 'bold',
-            }}
-          >
-            Symptom hinzufügen
-          </Text>
-        </TouchableOpacity>
+    setSelectedSymptom(null);
+    setSymptomIntensity(5);
+  }}
+>
+  <Text
+    style={{
+      color: '#0F1113',
+      fontWeight: 'bold',
+    }}
+  >
+    Symptom hinzufügen
+  </Text>
+</Pressable>
+
 
 
 
@@ -435,28 +442,38 @@ export default function EntryTab() {
           Speichern
       ------------------------------------- */}
 
-      <TouchableOpacity
-        style={{
-          backgroundColor: '#A5D6A7',
-          paddingVertical: 10,
-          borderRadius: 12,
-          alignItems: 'center',
-          marginTop: 20,
-        }}
-        
-        
-        onPress={() => {
-          createEntry();
+     <Pressable
+  style={({ pressed }) => ({
+    backgroundColor: pressed
+      ? 'rgba(165,214,167,0.85)'
+      : '#A5D6A7',
 
-          setSaved(true);
+    paddingVertical: 10,
+    borderRadius: 12,
+    marginBottom: 50,
+    alignItems: 'center',
+    marginTop: 20,
 
-          resetForm();
+    transform: [
+      {
+        scale: pressed ? 0.97 : 1,
+      },
+    ],
 
-          setTimeout(() => {
-            setSaved(false);
-          }, 3000);
-        }}
-      >
+    
+  })}
+  onPress={() => {
+    createEntry();
+
+    setSaved(true);
+
+    resetForm();
+
+    setTimeout(() => {
+      setSaved(false);
+    }, 3000);
+  }}
+>
         <Text
           style={{
             color: '#0F1113',
@@ -468,7 +485,7 @@ export default function EntryTab() {
         </Text>
 
         
-      </TouchableOpacity>
+      </Pressable>
     
   </ScrollView>
   

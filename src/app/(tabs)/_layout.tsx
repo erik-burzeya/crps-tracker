@@ -1,7 +1,7 @@
 import { useTheme } from '@/context/ThemeContext';
 import { BlurView } from 'expo-blur';
 import { Tabs } from 'expo-router';
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
 
 export default function TabsLayout() {
   const { colors } = useTheme();
@@ -9,6 +9,7 @@ export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
+        tabBarShowLabel: false,
 
         tabBarStyle: {
           position: 'absolute',
@@ -17,53 +18,48 @@ export default function TabsLayout() {
           right: 16,
           bottom: 16,
 
-          height: 72,
+          height: 80,
 
           borderRadius: 28,
 
           backgroundColor: 'transparent',
 
-          borderTopWidth: 0,
+          borderWidth: 2,
+          borderColor: 'rgba(255,255,255,0.35)',
 
           overflow: 'hidden',
 
-          borderWidth: 2,
-          borderColor: 'rgba(255,255,255,0.20)',
-
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 0,
-            height: 8,
-          },
-          shadowOpacity: 0.25,
-          shadowRadius: 20,
-
           
+
           elevation: 12,
         },
 
         tabBarBackground: () => (
-          <BlurView
-            intensity={40}
-            tint="dark"
+          <View
             style={{
               flex: 1,
-              borderRadius: 24,
+              borderRadius: 28,
               overflow: 'hidden',
             }}
-          />
+          >
+            <BlurView
+              intensity={65}
+              tint="dark"
+              style={{
+                flex: 1,
+              }}
+            />
+
+            {/*Glasreflex */}
+            <View
+              style={{
+                position: 'absolute',
+                backgroundColor: 'rgba(255,255,255,0.20)',
+              }}
+            />
+          </View>
         ),
-        headerShown: false,
-
-        tabBarShowLabel: false,
-
-        
-
-        tabBarActiveTintColor: colors.text,
-        tabBarInactiveTintColor: colors.textSecondary,
       }}
-
-      
     >
       <Tabs.Screen
         name="entry"
@@ -130,6 +126,5 @@ export default function TabsLayout() {
         }}
       />
     </Tabs>
-    
   );
 }
