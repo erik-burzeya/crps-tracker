@@ -1,8 +1,28 @@
 import { Spacing } from '@/constants/theme';
+import { useEntries } from '@/context/EntriesContext';
 import { useTheme } from '@/context/ThemeContext';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { BlurView } from 'expo-blur';
+import React, { useState } from 'react';
+
+import {
+  Linking,
+  Modal,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 export default function SettingsTab() {
   const { colors, themeMode, setThemeMode } = useTheme();
+  
+  const { clearEntries } = useEntries();
+
+  const [showDeleteAllModal, setShowDeleteAllModal] =
+    useState(false);
+
+  const openGithub = () => {
+    console.log('GitHub pressed');
+    Linking.openURL('https://github.com/erik-burzeya/crps-tracker');
+  };
 
   return (
     <View
@@ -10,7 +30,7 @@ export default function SettingsTab() {
         flex: 1,
         backgroundColor: colors.background,
         paddingHorizontal: Spacing.four,
-        paddingTop: Spacing.six,
+        paddingTop: 24,
       }}
     >
       <Text
@@ -21,7 +41,7 @@ export default function SettingsTab() {
           marginBottom: Spacing.five,
         }}
       >
-        Settings
+        Einstellungen
       </Text>
 
       <Text
@@ -109,6 +129,8 @@ export default function SettingsTab() {
         </View>
       </View>
 
+
+
       <Text
         style={{
           color: colors.textSecondary,
@@ -128,6 +150,7 @@ export default function SettingsTab() {
         }}
       >
         <TouchableOpacity
+          onPress={openGithub}
           style={{
             padding: Spacing.three,
             borderBottomWidth: 1,
@@ -143,7 +166,6 @@ export default function SettingsTab() {
             GitHub Repository
           </Text>
         </TouchableOpacity>
-
         <TouchableOpacity
           style={{
             padding: Spacing.three,
@@ -175,7 +197,133 @@ export default function SettingsTab() {
             Version 0.1.0
           </Text>
         </View>
+        
       </View>
+      <TouchableOpacity
+  onPress={() => {
+    setShowDeleteAllModal(true);
+  }}
+  style={{
+    marginBottom: Spacing.four,
+    marginTop: Spacing.four,
+  }}
+>
+  <Text
+    style={{
+      color: '#FF6B6B',
+      fontWeight: 'bold',
+    }}
+  >
+    Gesamten Verlauf löschen
+  </Text>
+</TouchableOpacity>
+      <Modal
+  visible={showDeleteAllModal}
+  transparent
+  animationType="fade"
+  
+>
+  
+  <View
+  style={{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 24,
+  }}
+>
+  <BlurView
+    intensity={25}
+    tint={themeMode === 'dark' ? 'dark' : 'light'}
+    style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+    }}
+  />
+
+  <View
+    style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0,0,0,0.35)',
+    }}
+  />
+
+  {/* Dein bestehendes Popup */}
+    <View
+      style={{
+        backgroundColor: colors.backgroundElement,
+        borderRadius: 20,
+        padding: 24,
+        width: '100%',
+        maxWidth: 400,
+      }}
+    >
+      <Text
+        style={{
+          color: colors.text,
+          fontSize: 20,
+          fontWeight: 'bold',
+          marginBottom: 12,
+        }}
+      >
+        Gesamten Verlauf löschen?
+      </Text>
+
+      <Text
+        style={{
+          color: colors.text,
+          marginBottom: 24,
+          opacity: 0.8,
+        }}
+      >
+        Alle gespeicherten Einträge werden dauerhaft gelöscht.
+      </Text>
+
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => setShowDeleteAllModal(false)}
+        >
+          <Text
+            style={{
+              color: '#A5D6A7',
+              fontWeight: 'bold',
+            }}
+          >
+            Abbrechen
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => {
+            clearEntries();
+            setShowDeleteAllModal(false);
+          }}
+        >
+          <Text
+            style={{
+              color: '#FF6B6B',
+              fontWeight: 'bold',
+            }}
+          >
+            Alles löschen
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  </View>
+</Modal>
     </View>
   );
 }

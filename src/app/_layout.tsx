@@ -1,3 +1,4 @@
+import { EntriesProvider } from '@/context/EntriesContext';
 import {
   DarkTheme,
   DefaultTheme,
@@ -24,7 +25,9 @@ function AppContent() {
 export default function RootLayout() {
   return (
     <AppThemeProvider>
-      <AppContent />
+      <EntriesProvider>
+        <AppContent />
+      </EntriesProvider>
     </AppThemeProvider>
   );
 }

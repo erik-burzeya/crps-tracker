@@ -1,20 +1,23 @@
 // -------------------------------------
 // Imports
 // -------------------------------------
-
+import { useTheme } from '@/context/ThemeContext';
 import React, { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Pressable, Text, TextInput, View } from 'react-native';
+
+import { ScrollView } from 'react-native';
 
 import MultiSelectChips from '@/components/entry/MultiSelectChips';
 import PainSlider from '@/components/entry/PainSlider';
 import SingleSelectChips from '@/components/entry/SingleSelectChips';
-import { useTheme } from '@/context/ThemeContext';
+
 
 import { ADDITIONAL_SYMPTOMS } from '@/constants/additionalSymptoms';
 
 import { PAIN_QUALITIES } from '@/constants/painQualities';
 import { TRIGGERS } from '@/constants/triggers';
 
+import { useEntries } from '@/context/EntriesContext';
 
 import {
   SKIN_COLORS,
@@ -25,7 +28,7 @@ import {
 export default function EntryTab() {
 
   const { colors } = useTheme();
-
+  const { addEntry } = useEntries();
   // -------------------------------------
   // Constants
   // -------------------------------------
@@ -87,6 +90,30 @@ export default function EntryTab() {
   // -------------------------------------
   // Helper Functions
   // -------------------------------------
+  const createEntry = () => {
+    const today = new Date();
+    
+    const date =
+      today.toLocaleDateString('de-DE');
+
+    addEntry({
+      id: Date.now().toString(),
+      date,
+
+      pain: painLevel,
+      note: notes,
+
+      painQualities,
+      triggers,
+
+      temperatureFeeling,
+      skinColor,
+
+      swelling,
+
+      additionalSymptoms,
+    });
+  };
 
  const resetForm = () => {
   setPainLevel(DEFAULT_PAIN_LEVEL);
@@ -105,12 +132,17 @@ export default function EntryTab() {
 };
     
   return (
-    <View
+    <ScrollView
       style={{
         flex: 1,
         backgroundColor: colors.background,
+        paddingVertical: 8,
+        marginTop: 20,
+        }}
+     contentContainerStyle={{
         paddingHorizontal: 24,
         paddingTop: 40,
+        paddingBottom: 80,
       }}
     >
       <Text
@@ -308,38 +340,45 @@ export default function EntryTab() {
           onChange={setSymptomIntensity}
         />
 
-        <TouchableOpacity
-          style={{
-            backgroundColor: colors.primary,
-            paddingVertical: 12,
-            borderRadius: 12,
-            alignItems: 'center',
-            marginTop: 12,
-          }}
-          onPress={() => {
-            if (!selectedSymptom) return;
+        <Pressable
+  style={({ pressed }) => ({
+    backgroundColor: pressed ? 'rgba(165,214,167,0.85)' : '#A5D6A7',
+    paddingVertical: 10,
+    borderRadius: 12,
+    marginBottom: 50,
+    alignItems: 'center',
+    marginTop: 20,
+    transform: [
+      {
+        scale: pressed ? 0.97 : 1,
+      },
+    ],
+  })} // <-- Hier wird die Style-Funktion korrekt geschlossen!
+  onPress={() => {
+    if (!selectedSymptom) return;
 
-            setAdditionalSymptoms([
-              ...additionalSymptoms,
-              {
-                symptom: selectedSymptom,
-                intensity: symptomIntensity,
-              },
-            ]);
+    setAdditionalSymptoms([
+      ...additionalSymptoms,
+      {
+        symptom: selectedSymptom,
+        intensity: symptomIntensity,
+      },
+    ]);
 
-            setSelectedSymptom(null);
-            setSymptomIntensity(5);
-          }}
-        >
-          <Text
-            style={{
-              color: '#0F1113',
-              fontWeight: 'bold',
-            }}
-          >
-            Symptom hinzufügen
-          </Text>
-        </TouchableOpacity>
+    setSelectedSymptom(null);
+    setSymptomIntensity(5);
+  }}
+>
+  <Text
+    style={{
+      color: '#0F1113',
+      fontWeight: 'bold',
+    }}
+  >
+    Symptom hinzufügen
+  </Text>
+</Pressable>
+
 
 
 
@@ -403,30 +442,42 @@ export default function EntryTab() {
           Speichern
       ------------------------------------- */}
 
-      <TouchableOpacity
-        style={{
-          backgroundColor: '#A5D6A7',
-          paddingVertical: 18,
-          borderRadius: 18,
-          alignItems: 'center',
-          marginTop: 20,
-        }}
-        
-        
-        onPress={() => {
-          setSaved(true);
+     <Pressable
+  style={({ pressed }) => ({
+    backgroundColor: pressed
+      ? 'rgba(165,214,167,0.85)'
+      : '#A5D6A7',
 
-          resetForm();
+    paddingVertical: 10,
+    borderRadius: 12,
+    marginBottom: 50,
+    alignItems: 'center',
+    marginTop: 20,
 
-          setTimeout(() => {
-            setSaved(false);
-          }, 3000);
-        }}
-      >
+    transform: [
+      {
+        scale: pressed ? 0.97 : 1,
+      },
+    ],
+
+    
+  })}
+  onPress={() => {
+    createEntry();
+
+    setSaved(true);
+
+    resetForm();
+
+    setTimeout(() => {
+      setSaved(false);
+    }, 3000);
+  }}
+>
         <Text
           style={{
             color: '#0F1113',
-            fontSize: 18,
+            
             fontWeight: 'bold',
           }}
         >
@@ -434,7 +485,9 @@ export default function EntryTab() {
         </Text>
 
         
-      </TouchableOpacity>
-    </View>
+      </Pressable>
+    
+  </ScrollView>
+  
   );
 }
