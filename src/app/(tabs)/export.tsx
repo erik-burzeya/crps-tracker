@@ -28,6 +28,17 @@ export default function ExportTab() {
       >
         Export
       </Text>
+
+      <Text
+        style={{
+          color: colors.text,
+          fontSize: 20,
+          fontWeight: 300,
+          marginBottom: 24,
+        }}
+      >
+        Kommt bald!
+      </Text>
     </ScrollView>
   );
 }

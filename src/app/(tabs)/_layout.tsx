@@ -64,6 +64,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="entry"
         options={{
+          headerShown: false,
           title: 'Home',
           tabBarIcon: () => (
             <Image
@@ -77,6 +78,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="history"
         options={{
+          headerShown: false,
           title: 'Verlauf',
           tabBarIcon: () => (
             <Image
@@ -90,6 +92,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="medication"
         options={{
+          headerShown: false,
           title: 'Medikamente',
           tabBarIcon: () => (
             <Image
@@ -103,6 +106,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="settings"
         options={{
+          headerShown: false,
           title: 'Einstellungen',
           tabBarIcon: () => (
             <Image
@@ -116,6 +120,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="export"
         options={{
+          headerShown: false,
           title: 'Export',
           tabBarIcon: () => (
             <Image
