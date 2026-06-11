@@ -1,28 +1,33 @@
 import { useTheme } from '@/context/ThemeContext';
-import { ScrollView, Text } from 'react-native';
+import React, { useState } from 'react';
+import { Pressable, ScrollView, Text, View } from 'react-native';
 
 export default function ExportTab() {
-  
   const { colors } = useTheme();
-  
+
+  const [timeRange, setTimeRange] = useState<
+    '30d' | '3m' | '6m' | 'all'
+  >('3m');
+
+  const handleExport = () => {
+    console.log('Export:', timeRange);
+  };
+
   return (
     <ScrollView
-      contentContainerStyle={{
-        padding: 24,
-      }}
-      
       style={{
         flex: 1,
-       
-        paddingHorizontal: 24,
         backgroundColor: colors.background,
+      }}
+      contentContainerStyle={{
+        padding: 24,
       }}
     >
       <Text
         style={{
-          color: colors.text,
           fontSize: 28,
-          fontWeight: 'bold',
+          fontWeight: '700',
+          color: colors.text,
           marginBottom: 24,
         }}
       >
@@ -31,21 +36,105 @@ export default function ExportTab() {
 
       <Text
         style={{
+          fontSize: 18,
+          fontWeight: '600',
           color: colors.text,
-          fontSize: 20,
-          fontWeight: 300,
-          marginBottom: 24,
+          marginBottom: 16,
         }}
       >
-        Kommt bald!
+        Zeitraum
       </Text>
+
+      <Pressable
+        onPress={() => setTimeRange('30d')}
+        style={{ marginBottom: 12 }}
+      >
+        <Text style={{ color: colors.text, fontSize: 16 }}>
+          {timeRange === '30d' ? '◉' : '○'} Letzte 30 Tage
+        </Text>
+      </Pressable>
+
+      <Pressable
+        onPress={() => setTimeRange('3m')}
+        style={{ marginBottom: 12 }}
+      >
+        <Text style={{ color: colors.text, fontSize: 16 }}>
+          {timeRange === '3m' ? '◉' : '○'} Letzte 3 Monate
+        </Text>
+      </Pressable>
+
+      <Pressable
+        onPress={() => setTimeRange('6m')}
+        style={{ marginBottom: 12 }}
+      >
+        <Text style={{ color: colors.text, fontSize: 16 }}>
+          {timeRange === '6m' ? '◉' : '○'} Letzte 6 Monate
+        </Text>
+      </Pressable>
+
+      <Pressable
+        onPress={() => setTimeRange('all')}
+        style={{ marginBottom: 32 }}
+      >
+        <Text style={{ color: colors.text, fontSize: 16 }}>
+          {timeRange === 'all' ? '◉' : '○'} Gesamter Verlauf
+        </Text>
+      </Pressable>
+
+      <Pressable
+        onPress={handleExport}
+        style={{
+          backgroundColor: '#A5D6A7',
+          paddingVertical: 14,
+          borderRadius: 12,
+          alignItems: 'center',
+          marginBottom: 32,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 16,
+            fontWeight: '600',
+            color: '#000',
+          }}
+        >
+          PDF-Bericht erstellen
+        </Text>
+      </Pressable>
+
+      <View>
+        <Text
+          style={{
+            color: colors.text,
+            fontWeight: '600',
+            marginBottom: 8,
+          }}
+        >
+          Der Bericht enthält:
+        </Text>
+
+        <Text style={{ color: colors.text }}>
+          • Schmerzstatistiken
+        </Text>
+        <Text style={{ color: colors.text }}>
+          • Schwellungshäufigkeit
+        </Text>
+        <Text style={{ color: colors.text }}>
+          • Temperaturstörungen
+        </Text>
+        <Text style={{ color: colors.text }}>
+          • Hautveränderungen
+        </Text>
+        <Text style={{ color: colors.text }}>
+          • Schmerzqualitäten
+        </Text>
+        <Text style={{ color: colors.text }}>
+          • Trigger
+        </Text>
+        <Text style={{ color: colors.text }}>
+          • Medikamentenliste
+        </Text>
+      </View>
     </ScrollView>
   );
 }
-
-
-
-
-      
-
-  
