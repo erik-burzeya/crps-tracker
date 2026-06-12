@@ -21,7 +21,7 @@ export const Colors = {
 
   dark: {
     text: '#ffffff',
-    background: '#060606',
+    background: '#0e0e0e',
     backgroundElement: '#212225',
     backgroundSelected: '#2E3135',
     textSecondary: '#B0B4BA',
@@ -29,6 +29,17 @@ export const Colors = {
     primary: '#A5D6A7',
     primaryLight: '#C8E6C9',
   },
+
+  blue: {
+  text: '#f2f2f2',
+    background: '#95b0da',
+    backgroundElement: '#3b4c7f',
+    backgroundSelected: '#2E3135',
+    textSecondary: '#8b98ab',
+
+    primary: '#78a1e6',
+    primaryLight: '#6e8dd6',
+  }
 } as const;
 
 export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
