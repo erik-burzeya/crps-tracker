@@ -1,4 +1,6 @@
 import { useTheme } from '@/context/ThemeContext';
+import * as Print from 'expo-print';
+import * as Sharing from 'expo-sharing';
 import React, { useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 
@@ -9,8 +11,30 @@ export default function ExportTab() {
     '30d' | '3m' | '6m' | 'all'
   >('3m');
 
-  const handleExport = () => {
-    console.log('Export:', timeRange);
+  const handleExport = async () => {
+  try {
+    const html = `
+      <html>
+        <body>
+          <h1>CRPS-Verlaufsbericht</h1>
+
+          <p>Zeitraum: ${timeRange}</p>
+
+          <h2>Testbericht</h2>
+
+          <p>Dieser PDF-Export funktioniert.</p>
+        </body>
+      </html>
+    `;
+
+    const { uri } = await Print.printToFileAsync({
+      html,
+    });
+
+      await Sharing.shareAsync(uri);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
