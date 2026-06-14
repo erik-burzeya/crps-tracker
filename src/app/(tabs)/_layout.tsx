@@ -79,7 +79,7 @@ export default function TabsLayout() {
                   ? require('../../../assets/Icons/Icons_dark.001.png')
                   : require('../../../assets/images/Icons/Icons.001.png')
               }
-              style={{ width: 28, height: 28, alignItems: 'center',justifyContent: 'center'}}
+              style={{ width: 26, height: 26, alignItems: 'center',justifyContent: 'center', marginTop: 6}}
             />
           ),
         }}
@@ -97,7 +97,7 @@ export default function TabsLayout() {
                   ? require('../../../assets/Icons/Icons_dark.002.png')
                   : require('../../../assets/images/Icons/Icons.002.png')
               }
-              style={{ width: 28, height: 28, alignItems: 'center',justifyContent: 'center' }}
+              style={{ width: 26, height: 26, alignItems: 'center',justifyContent: 'center', marginTop: 6 }}
             />
           ),
         }}
@@ -115,7 +115,7 @@ export default function TabsLayout() {
                   ? require('../../../assets/Icons/Icons_dark.003.png')
                   : require('../../../assets/images/Icons/Icons.003.png')
               }
-              style={{ width: 38, height: 38, alignItems: 'center',justifyContent: 'center' }}
+              style={{ width: 38, height: 38, alignItems: 'center',justifyContent: 'center', marginTop: 6 }}
             />
           ),
         }}
@@ -133,7 +133,7 @@ export default function TabsLayout() {
             ? require('../../../assets/Icons/Icons_dark.004.png')
             : require('../../../assets/images/Icons/Icons.004.png')
         }
-        style={{ width: 28, height: 28, alignItems: 'center',justifyContent: 'center' }}
+        style={{ width: 26, height: 26, alignItems: 'center',justifyContent: 'center', marginTop: 6 }}
       />
     ),
   }}
@@ -151,7 +151,7 @@ export default function TabsLayout() {
             ? require('../../../assets/Icons/Icons_dark.005.png')
             : require('../../../assets/images/Icons/Icons.005.png')
         }
-        style={{ width: 28, height: 28, alignItems: 'center',justifyContent: 'center' }}
+        style={{ width: 26, height: 26, alignItems: 'center',justifyContent: 'center', marginTop: 6 }}
       />
           ),
         }}
