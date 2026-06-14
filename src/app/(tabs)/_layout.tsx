@@ -18,7 +18,7 @@ export default function TabsLayout() {
           right: 16,
           bottom: 16,
 
-          height: 80,
+          height: 70,
 
           borderRadius: 28,
 
@@ -63,7 +63,8 @@ export default function TabsLayout() {
               }}
             />
           </View>
-        ),
+
+),
       }}
     >
       <Tabs.Screen
@@ -78,7 +79,7 @@ export default function TabsLayout() {
                   ? require('../../../assets/Icons/Icons_dark.001.png')
                   : require('../../../assets/images/Icons/Icons.001.png')
               }
-              style={{ width: 28, height: 28 }}
+              style={{ width: 28, height: 28, alignItems: 'center',justifyContent: 'center'}}
             />
           ),
         }}
@@ -96,7 +97,7 @@ export default function TabsLayout() {
                   ? require('../../../assets/Icons/Icons_dark.002.png')
                   : require('../../../assets/images/Icons/Icons.002.png')
               }
-              style={{ width: 28, height: 28 }}
+              style={{ width: 28, height: 28, alignItems: 'center',justifyContent: 'center' }}
             />
           ),
         }}
@@ -114,7 +115,7 @@ export default function TabsLayout() {
                   ? require('../../../assets/Icons/Icons_dark.003.png')
                   : require('../../../assets/images/Icons/Icons.003.png')
               }
-              style={{ width: 38, height: 38 }}
+              style={{ width: 38, height: 38, alignItems: 'center',justifyContent: 'center' }}
             />
           ),
         }}
@@ -132,7 +133,7 @@ export default function TabsLayout() {
             ? require('../../../assets/Icons/Icons_dark.004.png')
             : require('../../../assets/images/Icons/Icons.004.png')
         }
-        style={{ width: 28, height: 28 }}
+        style={{ width: 28, height: 28, alignItems: 'center',justifyContent: 'center' }}
       />
     ),
   }}
@@ -150,7 +151,7 @@ export default function TabsLayout() {
             ? require('../../../assets/Icons/Icons_dark.005.png')
             : require('../../../assets/images/Icons/Icons.005.png')
         }
-        style={{ width: 28, height: 28 }}
+        style={{ width: 28, height: 28, alignItems: 'center',justifyContent: 'center' }}
       />
           ),
         }}
