@@ -31,7 +31,7 @@ export function AppThemeProvider({
     >
       {children}
     </ThemeContext.Provider>
-  );
+    );
 }
 
 export function useTheme() {
