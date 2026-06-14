@@ -6,6 +6,7 @@ import {
 } from '@react-navigation/native';
 import { Slot } from 'expo-router';
 
+
 import { AnimatedSplashOverlay } from '@/components/animated-icon';
 import { AppThemeProvider, useTheme } from '@/context/ThemeContext';
 

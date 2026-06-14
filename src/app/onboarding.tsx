@@ -2,10 +2,10 @@ import { saveProfile } from '@/storage/profileStorage';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import {
-    Pressable,
-    Text,
-    TextInput,
-    View,
+  Pressable,
+  Text,
+  TextInput,
+  View,
 } from 'react-native';
 
 export default function OnboardingScreen() {
@@ -75,8 +75,10 @@ export default function OnboardingScreen() {
   );
 
   const progress = ((step + 1) / (totalSteps + 1)) * 100;
-
+console.log(back);
+console.log(next);
   return (
+    
     <View
       style={{
         flex: 1,
@@ -285,9 +287,9 @@ export default function OnboardingScreen() {
           <>
             <Text
               style={{
-                fontSize: 24,
+                fontSize: 20,
                 fontWeight: '600',
-                marginBottom: 20,
+                marginBottom: 50,
               }}
             >
               Zusammenfassung
@@ -303,25 +305,64 @@ export default function OnboardingScreen() {
       </View>
 
       <View
+  style={{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 20,
+  }}
+>
+  <Pressable
+    onPress={back}
+    style={{
+      paddingHorizontal: 20,
+      paddingVertical: 12,
+    }}
+  >
+    <Text
+      style={{
+        fontWeight: '600',
+      }}
+    >
+      Zurück
+    </Text>
+  </Pressable>
+
+  {step < 6 ? (
+    <Pressable
+    
+      onPress={next}
+      
+      style={{
+        paddingHorizontal: 20,
+        paddingVertical: 12,
+      }}
+    >
+      <Text
         style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
+          fontWeight: '600',
         }}
       >
-        <Pressable onPress={back}>
-          <Text>Zurück</Text>
-        </Pressable>
-
-        {step < 6 ? (
-          <Pressable onPress={next}>
-            <Text>Weiter</Text>
-          </Pressable>
-        ) : (
-          <Pressable onPress={finishOnboarding}>
-            <Text>Fertig</Text>
-          </Pressable>
-        )}
-      </View>
+        Weiter
+      </Text>
+    </Pressable>
+  ) : (
+    <Pressable
+      onPress={finishOnboarding}
+      style={{
+        paddingHorizontal: 20,
+        paddingVertical: 12,
+      }}
+    >
+      <Text
+        style={{
+          fontWeight: '600',
+        }}
+      >
+        Fertig
+      </Text>
+    </Pressable>
+  )}
+</View>
     </View>
   );
 }
