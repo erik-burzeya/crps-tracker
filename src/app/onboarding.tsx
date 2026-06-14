@@ -180,7 +180,7 @@ console.log(next);
             />
 
             <OptionButton
-              label="Bein"
+              label="Knie"
               selected={affectedRegion === 'Bein'}
               onPress={() => setAffectedRegion('Bein')}
             />
