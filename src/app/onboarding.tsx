@@ -1,25 +1,18 @@
-import { saveProfile } from '@/storage/profileStorage';
-import { router } from 'expo-router';
-import React, { useState } from 'react';
-import {
-  Pressable,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import { saveProfile } from "@/storage/profileStorage";
+import { router } from "expo-router";
+import { useState } from "react";
+import { Pressable, Text, TextInput, View } from "react-native";
 
 export default function OnboardingScreen() {
   const [step, setStep] = useState(0);
 
-  const [name, setName] = useState('');
-  const [affectedRegion, setAffectedRegion] = useState('');
-  const [crpsType, setCrpsType] = useState<'I' | 'II' | 'unknown'>(
-    'unknown'
-  );
+  const [name, setName] = useState("");
+  const [affectedRegion, setAffectedRegion] = useState("");
+  const [crpsType, setCrpsType] = useState<"I" | "II" | "unknown">("unknown");
   const [crpsPhase, setCrpsPhase] = useState<
-    'acute' | 'dystrophic' | 'atrophic' | 'unknown'
-  >('unknown');
-  const [diagnosisDate, setDiagnosisDate] = useState('');
+    "acute" | "dystrophic" | "atrophic" | "unknown"
+  >("unknown");
+  const [diagnosisDate, setDiagnosisDate] = useState("");
 
   const totalSteps = 6;
 
@@ -45,7 +38,7 @@ export default function OnboardingScreen() {
       onboardingCompleted: true,
     });
 
-    router.replace('/(tabs)/entry');
+    router.replace("/(tabs)/entry");
   };
 
   const OptionButton = ({
@@ -64,10 +57,8 @@ export default function OnboardingScreen() {
         borderRadius: 12,
         marginBottom: 12,
         borderWidth: 1,
-        borderColor: selected ? '#4CAF50' : '#666',
-        backgroundColor: selected
-          ? 'rgba(76,175,80,0.15)'
-          : 'transparent',
+        borderColor: selected ? "#4CAF50" : "#666",
+        backgroundColor: selected ? "rgba(76,175,80,0.15)" : "transparent",
       }}
     >
       <Text>{label}</Text>
@@ -75,10 +66,9 @@ export default function OnboardingScreen() {
   );
 
   const progress = ((step + 1) / (totalSteps + 1)) * 100;
-console.log(back);
-console.log(next);
+  console.log(back);
+  console.log(next);
   return (
-    
     <View
       style={{
         flex: 1,
@@ -89,7 +79,7 @@ console.log(next);
       <View
         style={{
           height: 8,
-          backgroundColor: '#333',
+          backgroundColor: "#333",
           borderRadius: 999,
           marginBottom: 30,
         }}
@@ -97,8 +87,8 @@ console.log(next);
         <View
           style={{
             width: `${progress}%`,
-            height: '100%',
-            backgroundColor: '#4CAF50',
+            height: "100%",
+            backgroundColor: "#4CAF50",
             borderRadius: 999,
           }}
         />
@@ -110,16 +100,14 @@ console.log(next);
             <Text
               style={{
                 fontSize: 28,
-                fontWeight: 'bold',
+                fontWeight: "bold",
                 marginBottom: 16,
               }}
             >
               Willkommen bei CRPS APP
             </Text>
 
-            <Text>
-              In wenigen Schritten richten wir dein Profil ein.
-            </Text>
+            <Text>In wenigen Schritten richten wir dein Profil ein.</Text>
           </>
         )}
 
@@ -128,7 +116,7 @@ console.log(next);
             <Text
               style={{
                 fontSize: 24,
-                fontWeight: '600',
+                fontWeight: "600",
                 marginBottom: 20,
               }}
             >
@@ -141,7 +129,7 @@ console.log(next);
               placeholder="Name"
               style={{
                 borderWidth: 1,
-                borderColor: '#666',
+                borderColor: "#666",
                 borderRadius: 12,
                 padding: 14,
               }}
@@ -154,7 +142,7 @@ console.log(next);
             <Text
               style={{
                 fontSize: 24,
-                fontWeight: '600',
+                fontWeight: "600",
                 marginBottom: 20,
               }}
             >
@@ -163,26 +151,26 @@ console.log(next);
 
             <OptionButton
               label="Hand"
-              selected={affectedRegion === 'Hand'}
-              onPress={() => setAffectedRegion('Hand')}
+              selected={affectedRegion === "Hand"}
+              onPress={() => setAffectedRegion("Hand")}
             />
 
             <OptionButton
               label="Arm"
-              selected={affectedRegion === 'Arm'}
-              onPress={() => setAffectedRegion('Arm')}
+              selected={affectedRegion === "Arm"}
+              onPress={() => setAffectedRegion("Arm")}
             />
 
             <OptionButton
               label="Fuß"
-              selected={affectedRegion === 'Fuß'}
-              onPress={() => setAffectedRegion('Fuß')}
+              selected={affectedRegion === "Fuß"}
+              onPress={() => setAffectedRegion("Fuß")}
             />
 
             <OptionButton
               label="Knie"
-              selected={affectedRegion === 'Bein'}
-              onPress={() => setAffectedRegion('Bein')}
+              selected={affectedRegion === "Bein"}
+              onPress={() => setAffectedRegion("Bein")}
             />
           </>
         )}
@@ -192,7 +180,7 @@ console.log(next);
             <Text
               style={{
                 fontSize: 24,
-                fontWeight: '600',
+                fontWeight: "600",
                 marginBottom: 20,
               }}
             >
@@ -201,20 +189,20 @@ console.log(next);
 
             <OptionButton
               label="Typ I"
-              selected={crpsType === 'I'}
-              onPress={() => setCrpsType('I')}
+              selected={crpsType === "I"}
+              onPress={() => setCrpsType("I")}
             />
 
             <OptionButton
               label="Typ II"
-              selected={crpsType === 'II'}
-              onPress={() => setCrpsType('II')}
+              selected={crpsType === "II"}
+              onPress={() => setCrpsType("II")}
             />
 
             <OptionButton
               label="Unbekannt"
-              selected={crpsType === 'unknown'}
-              onPress={() => setCrpsType('unknown')}
+              selected={crpsType === "unknown"}
+              onPress={() => setCrpsType("unknown")}
             />
           </>
         )}
@@ -224,7 +212,7 @@ console.log(next);
             <Text
               style={{
                 fontSize: 24,
-                fontWeight: '600',
+                fontWeight: "600",
                 marginBottom: 20,
               }}
             >
@@ -233,26 +221,26 @@ console.log(next);
 
             <OptionButton
               label="Akut"
-              selected={crpsPhase === 'acute'}
-              onPress={() => setCrpsPhase('acute')}
+              selected={crpsPhase === "acute"}
+              onPress={() => setCrpsPhase("acute")}
             />
 
             <OptionButton
               label="Dystrophisch"
-              selected={crpsPhase === 'dystrophic'}
-              onPress={() => setCrpsPhase('dystrophic')}
+              selected={crpsPhase === "dystrophic"}
+              onPress={() => setCrpsPhase("dystrophic")}
             />
 
             <OptionButton
               label="Atrophisch"
-              selected={crpsPhase === 'atrophic'}
-              onPress={() => setCrpsPhase('atrophic')}
+              selected={crpsPhase === "atrophic"}
+              onPress={() => setCrpsPhase("atrophic")}
             />
 
             <OptionButton
               label="Unbekannt"
-              selected={crpsPhase === 'unknown'}
-              onPress={() => setCrpsPhase('unknown')}
+              selected={crpsPhase === "unknown"}
+              onPress={() => setCrpsPhase("unknown")}
             />
           </>
         )}
@@ -262,7 +250,7 @@ console.log(next);
             <Text
               style={{
                 fontSize: 24,
-                fontWeight: '600',
+                fontWeight: "600",
                 marginBottom: 20,
               }}
             >
@@ -275,7 +263,7 @@ console.log(next);
               placeholder="MM/JJJJ"
               style={{
                 borderWidth: 1,
-                borderColor: '#666',
+                borderColor: "#666",
                 borderRadius: 12,
                 padding: 14,
               }}
@@ -288,81 +276,79 @@ console.log(next);
             <Text
               style={{
                 fontSize: 20,
-                fontWeight: '600',
+                fontWeight: "600",
                 marginBottom: 50,
               }}
             >
               Zusammenfassung
             </Text>
 
-            <Text>Name: {name || '-'}</Text>
-            <Text>Region: {affectedRegion || '-'}</Text>
+            <Text>Name: {name || "-"}</Text>
+            <Text>Region: {affectedRegion || "-"}</Text>
             <Text>CRPS-Typ: {crpsType}</Text>
             <Text>Phase: {crpsPhase}</Text>
-            <Text>Diagnose: {diagnosisDate || '-'}</Text>
+            <Text>Diagnose: {diagnosisDate || "-"}</Text>
           </>
         )}
       </View>
 
       <View
-  style={{
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingBottom: 20,
-  }}
->
-  <Pressable
-    onPress={back}
-    style={{
-      paddingHorizontal: 20,
-      paddingVertical: 12,
-    }}
-  >
-    <Text
-      style={{
-        fontWeight: '600',
-      }}
-    >
-      Zurück
-    </Text>
-  </Pressable>
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          paddingBottom: 20,
+        }}
+      >
+        <Pressable
+          onPress={back}
+          style={{
+            paddingHorizontal: 20,
+            paddingVertical: 12,
+          }}
+        >
+          <Text
+            style={{
+              fontWeight: "600",
+            }}
+          >
+            Zurück
+          </Text>
+        </Pressable>
 
-  {step < 6 ? (
-    <Pressable
-    
-      onPress={next}
-      
-      style={{
-        paddingHorizontal: 20,
-        paddingVertical: 12,
-      }}
-    >
-      <Text
-        style={{
-          fontWeight: '600',
-        }}
-      >
-        Weiter
-      </Text>
-    </Pressable>
-  ) : (
-    <Pressable
-      onPress={finishOnboarding}
-      style={{
-        paddingHorizontal: 20,
-        paddingVertical: 12,
-      }}
-    >
-      <Text
-        style={{
-          fontWeight: '600',
-        }}
-      >
-        Fertig
-      </Text>
-    </Pressable>
-  )}
-</View>
+        {step < 6 ? (
+          <Pressable
+            onPress={next}
+            style={{
+              paddingHorizontal: 20,
+              paddingVertical: 12,
+            }}
+          >
+            <Text
+              style={{
+                fontWeight: "600",
+              }}
+            >
+              Weiter
+            </Text>
+          </Pressable>
+        ) : (
+          <Pressable
+            onPress={finishOnboarding}
+            style={{
+              paddingHorizontal: 20,
+              paddingVertical: 12,
+            }}
+          >
+            <Text
+              style={{
+                fontWeight: "600",
+              }}
+            >
+              Fertig
+            </Text>
+          </Pressable>
+        )}
+      </View>
     </View>
   );
 }
