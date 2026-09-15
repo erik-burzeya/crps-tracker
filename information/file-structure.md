@@ -3,33 +3,37 @@
 src
 │
 ├── app
-│   ├── (tabs)
-│   │   ├── _layout.tsx
-│   │   ├── entry.tsx
-│   │   ├── history.tsx
-│   │   ├── medication.tsx
-│   │   ├── export.tsx
-│   │   └── settings.tsx
-│   │
-│   └── _layout.tsx
+│ ├── (tabs)
+│ │ ├── \_layout.tsx
+│ │ ├── entry.tsx
+│ │ ├── history.tsx
+│ │ ├── medication.tsx
+│ │ ├── export.tsx
+│ │ └── settings.tsx
+│ │
+│ └── \_layout.tsx
 │
 ├── components
-│   ├── PainScoreCard.tsx
-│   ├── SuccessBanner.tsx
-│   ├── MedicationCard.tsx
-│   ├── EntryForm.tsx
-│   └── StatCard.tsx
+│ ├── PainScoreCard.tsx
+│ ├── SuccessBanner.tsx
+│ ├── MedicationCard.tsx
+│ ├── EntryForm.tsx
+│ └── StatCard.tsx
 │
 ├── constants
-│   ├── theme.ts
-│   └── colors.ts
+│ ├── theme.ts
+│ └── colors.ts
+│
+├── context
+│ ├── EntriesContext.tsx
+│ └── ThemeContext.tsx
 │
 ├── data
-│   └── storage.ts
+│ └── storage.ts
 │
 ├── hooks
-│   └── useEntries.ts
+│ └── useEntries.ts
 │
 └── types
-    ├── Entry.ts
-    └── Medication.ts
+├── Entry.ts
+└── Medication.ts
