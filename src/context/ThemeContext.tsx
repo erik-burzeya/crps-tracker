@@ -1,12 +1,12 @@
 import { createContext, useContext, useState } from 'react';
 
-import { Colors } from '@/constants/theme';
+import { Colors, type ThemeColors, type ThemeName } from '@/theme';
 
-type ThemeMode = 'light' | 'dark';
+type ThemeMode = Extract<ThemeName, 'light' | 'dark'>;
 
 type ThemeContextType = {
   themeMode: ThemeMode;
-  colors: typeof Colors[keyof typeof Colors];
+  colors: ThemeColors;
   setThemeMode: (mode: ThemeMode) => void;
 };
 

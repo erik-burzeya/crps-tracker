@@ -1,11 +1,11 @@
+import { Radii, Shadows } from '@/theme';
 import { useTheme } from '@/context/ThemeContext';
 import { BlurView } from 'expo-blur';
 import { Tabs } from 'expo-router';
-import { Image, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 
 export default function TabsLayout() {
-  const { colors } = useTheme();
-  const { themeMode } = useTheme();
+  const { colors, themeMode } = useTheme();
   return (
     <Tabs
       screenOptions={{
@@ -20,27 +20,21 @@ export default function TabsLayout() {
 
           height: 70,
 
-          borderRadius: 28,
+          borderRadius: Radii.tabBar,
 
-          borderColor:
-          themeMode === 'light'
-            ? 'rgba(13, 13, 13, 0.12)'
-            : 'rgba(255,255,255,0.35)',
+          borderColor: colors.border,
 
           borderWidth: themeMode === 'light' ? 2.5 : 1,
 
           overflow: 'hidden',
-
-          
-
-          elevation: 12,
+          ...Shadows.tabBar,
         },
 
         tabBarBackground: () => (
           <View
             style={{
               flex: 1,
-              borderRadius: 28,
+              borderRadius: Radii.tabBar,
               overflow: 'hidden',
             }}
           >
@@ -55,11 +49,9 @@ export default function TabsLayout() {
             {/*Glasreflex */}
             <View
               style={{
-                position: 'absolute',
-                backgroundColor:
-              themeMode === 'light'
-                ? 'rgba(255,255,255,0.10)'
-                : 'rgba(255,255,255,0.20)',
+                ...StyleSheet.absoluteFillObject,
+                backgroundColor: colors.surface,
+                opacity: themeMode === 'light' ? 0.1 : 0.2,
               }}
             />
           </View>

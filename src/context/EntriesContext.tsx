@@ -1,38 +1,14 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState
-} from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-type Entry = {
-  id: string;
-  date: string;
-
-  pain: number;
-  note: string;
-
-  painQualities: string[];
-  triggers: string[];
-
-  temperatureFeeling: string | null;
-  skinColor: string | null;
-
-  swelling: boolean | null;
-
-  additionalSymptoms: {
-    symptom: string;
-    intensity: number;
-  }[];
-};
+import type { StoredEntry } from '@/types/entry';
 
 const STORAGE_KEY = 'crps_entries';
 
 type EntriesContextType = {
-  entries: Entry[];
-  addEntry: (entry: Entry) => void;
+  entries: StoredEntry[];
+  addEntry: (entry: StoredEntry) => void;
   deleteEntry: (id: string) => void;
   clearEntries: () => void;
 };
@@ -46,41 +22,41 @@ export function EntriesProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [entries, setEntries] = useState<Entry[]>([]);
+  const [entries, setEntries] = useState<StoredEntry[]>([]);
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-  loadEntries();
-}, []);
+    const loadEntries = async () => {
+      try {
+        const stored = await AsyncStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          setEntries(JSON.parse(stored) as StoredEntry[]);
+        }
+      } catch (error) {
+        console.error('Loading entries failed:', error);
+      } finally {
+        setHydrated(true);
+      }
+    };
 
-const loadEntries = async () => {
-  try {
-    const stored =
-      await AsyncStorage.getItem(STORAGE_KEY);
+    void loadEntries();
+  }, []);
 
-    if (stored) {
-      setEntries(JSON.parse(stored));
-    }
-  } catch (error) {
-    console.error('Loading entries failed:', error);
-  }
-};
+  useEffect(() => {
+    if (!hydrated) return;
 
-useEffect(() => {
-  saveEntries();
-}, [entries]);
+    const saveEntries = async () => {
+      try {
+        await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+      } catch (error) {
+        console.error('Saving entries failed:', error);
+      }
+    };
 
-const saveEntries = async () => {
-  try {
-    await AsyncStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(entries)
-    );
-  } catch (error) {
-    console.error('Saving entries failed:', error);
-  }
-};
+    void saveEntries();
+  }, [entries, hydrated]);
 
-const addEntry = (entry: Entry) => {
+const addEntry = (entry: StoredEntry) => {
   setEntries((prev) => [entry, ...prev]);
 };
 
@@ -92,22 +68,22 @@ const deleteEntry = (id: string) => {
 
 
 
-    const clearEntries = () => {
+  const clearEntries = () => {
     setEntries([]);
   };
 
-return (
-  <EntriesContext.Provider
-    value={{
-      entries,
-      addEntry,
-      deleteEntry,
-      clearEntries,
-    }}
-  >
-    {children}
-  </EntriesContext.Provider>
-);
+  return (
+    <EntriesContext.Provider
+      value={{
+        entries,
+        addEntry,
+        deleteEntry,
+        clearEntries,
+      }}
+    >
+      {children}
+    </EntriesContext.Provider>
+  );
 }
 
 export function useEntries() {

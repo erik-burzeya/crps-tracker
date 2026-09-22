@@ -1,6 +1,7 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import { useTheme } from '@/context/ThemeContext';
+import { createEntryStyles } from '../entry.styles';
 
 type Props = {
   options: string[];
@@ -14,13 +15,11 @@ export default function SingleSelectChips({
   onChange,
 }: Props) {
   const { colors } = useTheme();
+  const styles = createEntryStyles(colors);
 
   return (
     <View
-      style={{
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-      }}
+      style={styles.chips}
     >
       {options.map((item) => {
         const isSelected = selected === item;
@@ -29,22 +28,16 @@ export default function SingleSelectChips({
           <TouchableOpacity
             key={item}
             onPress={() => onChange(item)}
-            style={{
-              paddingHorizontal: 12,
-              paddingVertical: 8,
-              borderRadius: 20,
-              marginRight: 8,
-              marginBottom: 8,
-              backgroundColor: isSelected
-                ? colors.primary
-                : colors.backgroundElement,
-            }}
+            style={[
+              styles.chip,
+              { backgroundColor: isSelected ? colors.primary : colors.surface },
+            ]}
           >
             <Text
-              style={{
-                color: isSelected ? '#000000' : colors.text,
-                fontSize: 14,
-              }}
+              style={[
+                styles.chipText,
+                { color: isSelected ? colors.onPrimary : colors.textPrimary },
+              ]}
             >
               {item}
             </Text>

@@ -3,6 +3,8 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 import { useTheme } from '@/context/ThemeContext';
+import { Spacing } from '@/theme';
+import { createEntryStyles } from '../entry.styles';
 
 interface PainSliderProps {
   value: number;
@@ -14,6 +16,7 @@ export default function PainSlider({
   onChange,
 }: PainSliderProps) {
   const { colors } = useTheme();
+  const styles = createEntryStyles(colors);
 
   const getDescription = (pain: number) => {
     if (pain <= 1) return 'Kaum spürbar';
@@ -26,37 +29,19 @@ export default function PainSlider({
 
   return (
     <View
-      style={{
-        backgroundColor: colors.backgroundElement,
-        borderRadius: 16,
-        padding: 16,
-        marginBottom: 16,
-      }}
+      style={styles.card}
     >
       <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: 12,
-        }}
+        style={styles.row}
       >
         <Text
-          style={{
-            color: colors.text,
-            fontSize: 16,
-            fontWeight: '600',
-          }}
+          style={styles.label}
         >
           Schmerzintensität
         </Text>
 
         <Text
-          style={{
-            color: colors.text,
-            fontSize: 24,
-            fontWeight: 'bold',
-          }}
+          style={styles.value}
         >
           {value}/10
         </Text>
@@ -74,10 +59,7 @@ export default function PainSlider({
         />
 
       <Text
-        style={{
-          color: colors.textSecondary,
-          marginTop: 8,
-        }}
+        style={[styles.secondary, { marginTop: Spacing.sm }]}
       >
         {getDescription(value)}
       </Text>

@@ -1,6 +1,7 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import { useTheme } from '@/context/ThemeContext';
+import { createEntryStyles } from '../entry.styles';
 
 type Props = {
   options: string[];
@@ -14,6 +15,7 @@ export default function MultiSelectChips({
   onChange,
 }: Props) {
   const { colors } = useTheme();
+  const styles = createEntryStyles(colors);
 
   function toggleItem(item: string) {
     if (selected.includes(item)) {
@@ -25,11 +27,7 @@ export default function MultiSelectChips({
 
   return (
     <View
-      style={{
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        gap: 8,
-      }}
+      style={styles.chips}
     >
       {options.map((item) => {
         const isSelected = selected.includes(item);
@@ -38,22 +36,16 @@ export default function MultiSelectChips({
           <TouchableOpacity
             key={item}
             onPress={() => toggleItem(item)}
-            style={{
-              paddingHorizontal: 12,
-              paddingVertical: 8,
-              borderRadius: 20,
-              backgroundColor: isSelected
-                ? colors.primary
-                : colors.backgroundElement,
-            }}
+            style={[
+              styles.chip,
+              { backgroundColor: isSelected ? colors.primary : colors.surface },
+            ]}
           >
             <Text
-              style={{
-                color: isSelected
-                  ? '#000000'
-                  : colors.text,
-                fontSize: 14,
-              }}
+              style={[
+                styles.chipText,
+                { color: isSelected ? colors.onPrimary : colors.textPrimary },
+              ]}
             >
               {item}
             </Text>

@@ -19,3 +19,16 @@ export interface Entry {
 
   additionalSymptoms: AdditionalSymptom[];
 }
+
+export interface StoredEntry {
+  id: string;
+  date: string;
+  pain: number;
+  note: string;
+  painQualities: string[];
+  triggers: string[];
+  temperatureFeeling: string | null;
+  skinColor: string | null;
+  swelling: boolean | null;
+  additionalSymptoms: AdditionalSymptom[];
+}
